@@ -1,0 +1,6 @@
+framework module Pods_PerfectRep {
+  umbrella header "Pods-PerfectRep-umbrella.h"
+
+  export *
+  module * { export * }
+}

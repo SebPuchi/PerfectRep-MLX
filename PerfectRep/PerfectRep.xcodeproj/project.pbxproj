@@ -16,6 +16,7 @@
 		9E18BA142C122D0100F78A5B /* PerfectRepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA132C122D0100F78A5B /* PerfectRepTests.swift */; };
 		9E18BA1E2C122D0100F78A5B /* PerfectRepUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA1D2C122D0100F78A5B /* PerfectRepUITests.swift */; };
 		9E18BA202C122D0100F78A5B /* PerfectRepUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA1F2C122D0100F78A5B /* PerfectRepUITestsLaunchTests.swift */; };
+		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectRep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E18B9F92C122CFF00F78A5B /* PerfectRep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectRep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E18B9FC2C122CFF00F78A5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E18B9FE2C122CFF00F78A5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		9E18BA192C122D0100F78A5B /* PerfectRepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerfectRepUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E18BA1D2C122D0100F78A5B /* PerfectRepUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectRepUITests.swift; sourceTree = "<group>"; };
 		9E18BA1F2C122D0100F78A5B /* PerfectRepUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectRepUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
+		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +81,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23D395D6093BAC6E312E1E67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		885E7B8757D799EC53914C73 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */,
+				AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9E18B9F02C122CFF00F78A5B = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +105,8 @@
 				9E18BA122C122D0100F78A5B /* PerfectRepTests */,
 				9E18BA1C2C122D0100F78A5B /* PerfectRepUITests */,
 				9E18B9FA2C122CFF00F78A5B /* Products */,
+				885E7B8757D799EC53914C73 /* Pods */,
+				23D395D6093BAC6E312E1E67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E18BA232C122D0100F78A5B /* Build configuration list for PBXNativeTarget "PerfectRep" */;
 			buildPhases = (
+				61189314C3AC8A687B7F3F68 /* [CP] Check Pods Manifest.lock */,
 				9E18B9F52C122CFF00F78A5B /* Sources */,
 				9E18B9F62C122CFF00F78A5B /* Frameworks */,
 				9E18B9F72C122CFF00F78A5B /* Resources */,
+				34DC9402479D4F41D33F5EEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +278,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34DC9402479D4F41D33F5EEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PerfectRep/Pods-PerfectRep-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PerfectRep/Pods-PerfectRep-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PerfectRep/Pods-PerfectRep-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61189314C3AC8A687B7F3F68 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PerfectRep-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9E18B9F52C122CFF00F78A5B /* Sources */ = {
@@ -437,11 +505,13 @@
 		};
 		9E18BA242C122D0100F78A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PerfectRep/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PerfectRep;
@@ -467,11 +537,13 @@
 		};
 		9E18BA252C122D0100F78A5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PerfectRep/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PerfectRep;
