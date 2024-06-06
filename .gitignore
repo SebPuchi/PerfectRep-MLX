@@ -1,0 +1,56 @@
+# OS X
+.DS_Store
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+## Obj-C/Swift specific
+DerivedData
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.dia
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+.build/
+project.xcworkspace
+
+
+# Carthage
+
+Carthage/Build
+
+# fastlane
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+Carthage
+DGCharts.framework.zip
+.swiftpm/
