@@ -150,15 +150,10 @@ public final class SQLiteStore: LocalStorage {
      [NSSQLitePragmasOption: ["journal_mode": "WAL"]]
      ```
      */
-    public let storeOptions: [AnyHashable: Any]? = autoreleasepool {
-        
-        var storeOptions: [AnyHashable: Any] = [NSSQLitePragmasOption: ["journal_mode": "WAL"]]
-        if #available(iOS 11.0, macOS 10.13, tvOSApplicationExtension 11.0, watchOSApplicationExtension 4.0, *) {
-
-            storeOptions[NSBinaryStoreInsecureDecodingCompatibilityOption] = true
-        }
-        return storeOptions
-    }
+    public let storeOptions: [AnyHashable: Any]? = [
+        NSSQLitePragmasOption: ["journal_mode": "WAL"],
+        NSBinaryStoreInsecureDecodingCompatibilityOption: true
+    ]
     
     /**
      Do not call directly. Used by the `DataStack` internally.
@@ -223,7 +218,7 @@ public final class SQLiteStore: LocalStorage {
             var storeOptions = self.storeOptions ?? [:]
             storeOptions[NSSQLitePragmasOption] = ["journal_mode": "DELETE"]
             try coordinator.addPersistentStore(
-                ofType: type(of: self).storeType,
+                ofType: Self.storeType,
                 configurationName: self.configuration,
                 at: fileURL,
                 options: storeOptions
@@ -289,7 +284,7 @@ public final class SQLiteStore: LocalStorage {
                 var storeOptions = self.storeOptions ?? [:]
                 storeOptions[NSSQLitePragmasOption] = ["journal_mode": "DELETE"]
                 let store = try journalUpdatingCoordinator.addPersistentStore(
-                    ofType: type(of: self).storeType,
+                    ofType: Self.storeType,
                     configurationName: self.configuration,
                     at: fileURL,
                     options: storeOptions
@@ -303,7 +298,7 @@ public final class SQLiteStore: LocalStorage {
     
     // MARK: Internal
     
-    internal static let defaultRootDirectory: URL = cs_lazy {
+    internal static let defaultRootDirectory: URL = Internals.with {
         
         #if os(tvOS)
             let systemDirectorySearchPath = FileManager.SearchPathDirectory.cachesDirectory
@@ -328,7 +323,7 @@ public final class SQLiteStore: LocalStorage {
         )
         .appendingPathExtension("sqlite")
     
-    internal static let legacyDefaultRootDirectory: URL = cs_lazy {
+    internal static let legacyDefaultRootDirectory: URL = Internals.with {
         
         #if os(tvOS)
             let systemDirectorySearchPath = FileManager.SearchPathDirectory.cachesDirectory
@@ -341,7 +336,7 @@ public final class SQLiteStore: LocalStorage {
             in: .userDomainMask).first!
     }
     
-    internal static let legacyDefaultFileURL = cs_lazy {
+    internal static let legacyDefaultFileURL = Internals.with {
         
         return SQLiteStore.legacyDefaultRootDirectory
         .appendingPathComponent(DataStack.applicationName, isDirectory: false)

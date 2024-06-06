@@ -50,17 +50,17 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter into: the `Into` clause indicating the destination `NSManagedObject` or `CoreStoreObject` entity type and the destination configuration
      - returns: a new `NSManagedObject` or `CoreStoreObject` instance of the specified entity type.
      */
-    public func create<D>(_ into: Into<D>) -> D {
+    public func create<O>(_ into: Into<O>) -> O {
         
         let entityClass = into.entityClass
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to create an entity of type \(cs_typeName(entityClass)) outside its designated queue."
+            "Attempted to create an entity of type \(Internals.typeName(entityClass)) outside its designated queue."
         )
         
         let context = self.context
         let dataStack = context.parentStack!
-        let entityIdentifier = EntityIdentifier(entityClass)
+        let entityIdentifier = Internals.EntityIdentifier(entityClass)
         if into.inferStoreIfPossible {
             
             switch dataStack.persistentStore(
@@ -77,10 +77,10 @@ public /*abstract*/ class BaseDataTransaction {
                 )
                 
             case (nil, true):
-                CoreStore.abort("Attempted to create an entity of type \(cs_typeName(entityClass)) with ambiguous destination persistent store, but the configuration name was not specified.")
+                Internals.abort("Attempted to create an entity of type \(Internals.typeName(entityClass)) with ambiguous destination persistent store, but the configuration name was not specified.")
                 
             default:
-                CoreStore.abort("Attempted to create an entity of type \(cs_typeName(entityClass)), but a destination persistent store containing the entity type could not be found.")
+                Internals.abort("Attempted to create an entity of type \(Internals.typeName(entityClass)), but a destination persistent store containing the entity type could not be found.")
             }
         }
         else {
@@ -100,16 +100,16 @@ public /*abstract*/ class BaseDataTransaction {
                 )
                 
             case (nil, true):
-                CoreStore.abort("Attempted to create an entity of type \(cs_typeName(entityClass)) with ambiguous destination persistent store, but the configuration name was not specified.")
+                Internals.abort("Attempted to create an entity of type \(Internals.typeName(entityClass)) with ambiguous destination persistent store, but the configuration name was not specified.")
                 
             default:
                 if let configuration = into.configuration {
                     
-                    CoreStore.abort("Attempted to create an entity of type \(cs_typeName(entityClass)) into the configuration \"\(configuration)\", which it doesn't belong to.")
+                    Internals.abort("Attempted to create an entity of type \(Internals.typeName(entityClass)) into the configuration \"\(configuration)\", which it doesn't belong to.")
                 }
                 else {
                     
-                    CoreStore.abort("Attempted to create an entity of type \(cs_typeName(entityClass)) into the default configuration, which it doesn't belong to.")
+                    Internals.abort("Attempted to create an entity of type \(Internals.typeName(entityClass)) into the default configuration, which it doesn't belong to.")
                 }
             }
         }
@@ -121,11 +121,11 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter object: the `NSManagedObject` or `CoreStoreObject` type to be edited
      - returns: an editable proxy for the specified `NSManagedObject` or `CoreStoreObject`.
      */
-    public func edit<D: DynamicObject>(_ object: D?) -> D? {
+    public func edit<O: DynamicObject>(_ object: O?) -> O? {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to update an entity of type \(cs_typeName(object)) outside its designated queue."
+            "Attempted to update an entity of type \(Internals.typeName(object)) outside its designated queue."
         )
         guard let object = object else {
             
@@ -141,62 +141,69 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter objectID: the `NSManagedObjectID` for the object to be edited
      - returns: an editable proxy for the specified `NSManagedObject` or `CoreStoreObject`.
      */
-    public func edit<D>(_ into: Into<D>, _ objectID: NSManagedObjectID) -> D? {
+    public func edit<O>(_ into: Into<O>, _ objectID: NSManagedObjectID) -> O? {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to update an entity of type \(cs_typeName(into.entityClass)) outside its designated queue."
+            "Attempted to update an entity of type \(Internals.typeName(into.entityClass)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             into.inferStoreIfPossible
                 || (into.configuration ?? DataStack.defaultConfigurationName) == objectID.persistentStore?.configurationName,
-            "Attempted to update an entity of type \(cs_typeName(into.entityClass)) but the specified persistent store do not match the `NSManagedObjectID`."
+            "Attempted to update an entity of type \(Internals.typeName(into.entityClass)) but the specified persistent store do not match the `NSManagedObjectID`."
         )
         return self.fetchExisting(objectID)
     }
-    
+
     /**
-     Deletes a specified `NSManagedObject` or `CoreStoreObject`.
-     
-     - parameter object: the `NSManagedObject` or `CoreStoreObject` to be deleted
+     Deletes the objects with the specified `NSManagedObjectID`s.
+
+     - parameter objectIDs: the `NSManagedObjectID`s of the objects to delete
      */
-    public func delete<D: DynamicObject>(_ object: D?) {
-        
-        CoreStore.assert(
+    public func delete<S: Sequence>(objectIDs: S) where S.Iterator.Element: NSManagedObjectID {
+
+        Internals.assert(
             self.isRunningInAllowedQueue(),
             "Attempted to delete an entity outside its designated queue."
         )
         let context = self.context
-        object
-            .flatMap(context.fetchExisting)
-            .flatMap({ context.delete($0.cs_toRaw()) })
+        objectIDs.forEach {
+
+            context.fetchExisting($0).map(context.delete(_:))
+        }
     }
     
     /**
-     Deletes the specified `NSManagedObject`s or `CoreStoreObject`s.
+     Deletes the specified `NSManagedObject`s or `CoreStoreObject`s represented by series of `ObjectRepresentation`s.
      
-     - parameter object1: the `NSManagedObject` or `CoreStoreObject` to be deleted
-     - parameter object2: another `NSManagedObject` or `CoreStoreObject` to be deleted
-     - parameter objects: other `NSManagedObject`s or `CoreStoreObject`s to be deleted
+     - parameter object: the `ObjectRepresentation` representing an `NSManagedObject` or `CoreStoreObject` to be deleted
+     - parameter objects: other `ObjectRepresentation`s representing `NSManagedObject`s or `CoreStoreObject`s to be deleted
      */
-    public func delete<D: DynamicObject>(_ object1: D?, _ object2: D?, _ objects: D?...) {
+    public func delete<O: ObjectRepresentation>(_ object: O?, _ objects: O?...) {
         
-        self.delete(([object1, object2] + objects).compactMap { $0 })
+        Internals.assert(
+            self.isRunningInAllowedQueue(),
+            "Attempted to delete an entity outside its designated queue."
+        )
+        self.delete(([object] + objects).compactMap { $0 })
     }
     
     /**
-     Deletes the specified `NSManagedObject`s or `CoreStoreObject`s.
+     Deletes the specified `NSManagedObject`s or `CoreStoreObject`s represented by an `ObjectRepresenation`.
      
-     - parameter objects: the `NSManagedObject`s or `CoreStoreObject`s to be deleted
+     - parameter objects: the `ObjectRepresenation`s representing `NSManagedObject`s or `CoreStoreObject`s to be deleted
      */
-    public func delete<S: Sequence>(_ objects: S) where S.Iterator.Element: DynamicObject {
+    public func delete<S: Sequence>(_ objects: S) where S.Iterator.Element: ObjectRepresentation {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
             "Attempted to delete entities outside their designated queue."
         )
         let context = self.context
-        objects.forEach { context.fetchExisting($0).flatMap({ context.delete($0.cs_toRaw()) }) }
+        objects.forEach {
+
+            $0.asEditable(in: self).map({ context.delete($0.cs_toRaw()) })
+        }
     }
     
     /**
@@ -204,7 +211,7 @@ public /*abstract*/ class BaseDataTransaction {
      */
     public func refreshAndMergeAllObjects() {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
             "Attempted to refresh entities outside their designated queue."
         )
@@ -217,20 +224,20 @@ public /*abstract*/ class BaseDataTransaction {
     /**
      Returns `true` if the object has any property values changed. This method should not be called after the `commit()` method was called.
 
-     - parameter entity: the `DynamicObject` instance
+     - parameter object: the `DynamicObject` instance
      - returns: `true` if the object has any property values changed.
      */
-    public func objectHasPersistentChangedValues<D: DynamicObject>(_ entity: D) -> Bool {
+    public func objectHasPersistentChangedValues<O: DynamicObject>(_ object: O) -> Bool {
 
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access inserted objects from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access inserted objects from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access inserted objects from an already committed \(cs_typeName(self))."
+            "Attempted to access inserted objects from an already committed \(Internals.typeName(self))."
         )
-        return entity.cs_toRaw().hasPersistentChangedValues
+        return object.cs_toRaw().hasPersistentChangedValues
     }
     
     /**
@@ -239,15 +246,15 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `DynamicObject`s of the specified type that were inserted to the transaction.
      */
-    public func insertedObjects<D: DynamicObject>(_ entity: D.Type) -> Set<D> {
+    public func insertedObjects<O: DynamicObject>(_ entity: O.Type) -> Set<O> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access inserted objects from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access inserted objects from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access inserted objects from an already committed \(cs_typeName(self))."
+            "Attempted to access inserted objects from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.insertedObjects.compactMap({ entity.cs_matches(object: $0) ? entity.cs_fromRaw(object: $0) : nil }))
     }
@@ -259,13 +266,13 @@ public /*abstract*/ class BaseDataTransaction {
      */
     public func insertedObjectIDs() -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access inserted object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access inserted object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access inserted objects IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access inserted objects IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.insertedObjects.map { $0.objectID })
     }
@@ -276,15 +283,15 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `NSManagedObjectID`s of the specified type that were inserted to the transaction.
      */
-    public func insertedObjectIDs<D: DynamicObject>(_ entity: D.Type) -> Set<NSManagedObjectID> {
+    public func insertedObjectIDs<O: DynamicObject>(_ entity: O.Type) -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access inserted object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access inserted object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access inserted objects IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access inserted objects IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.insertedObjects.compactMap({ entity.cs_matches(object: $0) ? $0.objectID : nil }))
     }
@@ -295,15 +302,15 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `DynamicObject`s of the specified type that were updated in the transaction.
      */
-    public func updatedObjects<D: DynamicObject>(_ entity: D.Type) -> Set<D> {
+    public func updatedObjects<O: DynamicObject>(_ entity: O.Type) -> Set<O> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access updated objects from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access updated objects from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access updated objects from an already committed \(cs_typeName(self))."
+            "Attempted to access updated objects from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.updatedObjects.compactMap({ entity.cs_matches(object: $0) ? entity.cs_fromRaw(object: $0) : nil }))
     }
@@ -315,13 +322,13 @@ public /*abstract*/ class BaseDataTransaction {
      */
     public func updatedObjectIDs() -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access updated object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access updated object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access updated object IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access updated object IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.updatedObjects.map { $0.objectID })
     }
@@ -332,15 +339,15 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `NSManagedObjectID`s of the specified type that were updated in the transaction.
      */
-    public func updatedObjectIDs<D: DynamicObject>(_ entity: D.Type) -> Set<NSManagedObjectID> {
+    public func updatedObjectIDs<O: DynamicObject>(_ entity: O.Type) -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access updated object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access updated object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access updated object IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access updated object IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.updatedObjects.compactMap({ entity.cs_matches(object: $0) ? $0.objectID : nil }))
     }
@@ -351,15 +358,15 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `DynamicObject`s of the specified type that were deleted from the transaction.
      */
-    public func deletedObjects<D: DynamicObject>(_ entity: D.Type) -> Set<D> {
+    public func deletedObjects<O: DynamicObject>(_ entity: O.Type) -> Set<O> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access deleted objects from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access deleted objects from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access deleted objects from an already committed \(cs_typeName(self))."
+            "Attempted to access deleted objects from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.deletedObjects.compactMap({ entity.cs_matches(object: $0) ? entity.cs_fromRaw(object: $0) : nil }))
     }
@@ -372,13 +379,13 @@ public /*abstract*/ class BaseDataTransaction {
      */
     public func deletedObjectIDs() -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access deleted object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access deleted object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access deleted object IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access deleted object IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.deletedObjects.map { $0.objectID })
     }
@@ -389,21 +396,26 @@ public /*abstract*/ class BaseDataTransaction {
      - parameter entity: the `DynamicObject` subclass to filter
      - returns: a `Set` of pending `NSManagedObjectID`s of the specified type that were deleted from the transaction.
      */
-    public func deletedObjectIDs<D: DynamicObject>(_ entity: D.Type) -> Set<NSManagedObjectID> {
+    public func deletedObjectIDs<O: DynamicObject>(_ entity: O.Type) -> Set<NSManagedObjectID> {
         
-        CoreStore.assert(
+        Internals.assert(
             self.isRunningInAllowedQueue(),
-            "Attempted to access deleted object IDs from a \(cs_typeName(self)) outside its designated queue."
+            "Attempted to access deleted object IDs from a \(Internals.typeName(self)) outside its designated queue."
         )
-        CoreStore.assert(
+        Internals.assert(
             !self.isCommitted,
-            "Attempted to access deleted object IDs from an already committed \(cs_typeName(self))."
+            "Attempted to access deleted object IDs from an already committed \(Internals.typeName(self))."
         )
         return Set(self.context.deletedObjects.compactMap({ entity.cs_matches(object: $0) ? $0.objectID : nil }))
     }
     
     
     // MARK: 3rd Party Utilities
+    
+    /**
+     An arbitrary value that identifies the source of this transaction. Callers of the transaction can provide this value through the `DataStack.perform(...)` methods.
+     */
+    public let sourceIdentifier: Any?
     
     /**
      Allow external libraries to store custom data in the transaction. App code should rarely have a need for this.
@@ -422,13 +434,19 @@ public /*abstract*/ class BaseDataTransaction {
     
     internal let context: NSManagedObjectContext
     internal let transactionQueue: DispatchQueue
-    internal let childTransactionQueue = DispatchQueue.serial("com.corestore.datastack.childTransactionQueue")
+    internal let childTransactionQueue = DispatchQueue.serial("com.corestore.datastack.childTransactionQueue", qos: .utility)
     internal let supportsUndo: Bool
     internal let bypassesQueueing: Bool
     internal var isCommitted = false
     internal var result: (hasChanges: Bool, error: CoreStoreError?)?
     
-    internal init(mainContext: NSManagedObjectContext, queue: DispatchQueue, supportsUndo: Bool, bypassesQueueing: Bool) {
+    internal init(
+        mainContext: NSManagedObjectContext,
+        queue: DispatchQueue,
+        supportsUndo: Bool,
+        bypassesQueueing: Bool,
+        sourceIdentifier: Any?
+    ) {
         
         let context = mainContext.temporaryContextInTransactionWithConcurrencyType(
             queue == .main
@@ -439,6 +457,7 @@ public /*abstract*/ class BaseDataTransaction {
         self.context = context
         self.supportsUndo = supportsUndo
         self.bypassesQueueing = bypassesQueueing
+        self.sourceIdentifier = sourceIdentifier
         
         context.parentTransaction = self
         context.isTransactionContext = true

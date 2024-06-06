@@ -39,7 +39,7 @@ extension DataStack: FetchableSource, QueryableSource {
      - parameter object: a reference to the object created/fetched outside the `DataStack`
      - returns: the `DynamicObject` instance if the object exists in the `DataStack`, or `nil` if not found.
      */
-    public func fetchExisting<D: DynamicObject>(_ object: D) -> D? {
+    public func fetchExisting<O: DynamicObject>(_ object: O) -> O? {
         
         return self.mainContext.fetchExisting(object)
     }
@@ -50,7 +50,7 @@ extension DataStack: FetchableSource, QueryableSource {
      - parameter objectID: the `NSManagedObjectID` for the object
      - returns: the `DynamicObject` instance if the object exists in the `DataStack`, or `nil` if not found.
      */
-    public func fetchExisting<D: DynamicObject>(_ objectID: NSManagedObjectID) -> D? {
+    public func fetchExisting<O: DynamicObject>(_ objectID: NSManagedObjectID) -> O? {
         
         return self.mainContext.fetchExisting(objectID)
     }
@@ -61,7 +61,7 @@ extension DataStack: FetchableSource, QueryableSource {
      - parameter objects: an array of `DynamicObject`s created/fetched outside the `DataStack`
      - returns: the `DynamicObject` array for objects that exists in the `DataStack`
      */
-    public func fetchExisting<D: DynamicObject, S: Sequence>(_ objects: S) -> [D] where S.Iterator.Element == D {
+    public func fetchExisting<O: DynamicObject, S: Sequence>(_ objects: S) -> [O] where S.Iterator.Element == O {
         
         return self.mainContext.fetchExisting(objects)
     }
@@ -72,7 +72,7 @@ extension DataStack: FetchableSource, QueryableSource {
      - parameter objectIDs: the `NSManagedObjectID` array for the objects
      - returns: the `DynamicObject` array for objects that exists in the `DataStack`
      */
-    public func fetchExisting<D: DynamicObject, S: Sequence>(_ objectIDs: S) -> [D] where S.Iterator.Element == NSManagedObjectID {
+    public func fetchExisting<O: DynamicObject, S: Sequence>(_ objectIDs: S) -> [O] where S.Iterator.Element == NSManagedObjectID {
         
         return self.mainContext.fetchExisting(objectIDs)
     }
@@ -85,11 +85,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the first `DynamicObject` instance that satisfies the specified `FetchClause`s, or `nil` if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchOne<D>(_ from: From<D>, _ fetchClauses: FetchClause...) throws -> D? {
+    public func fetchOne<O>(_ from: From<O>, _ fetchClauses: FetchClause...) throws -> O? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchOne(from, fetchClauses)
     }
@@ -102,11 +102,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the first `DynamicObject` instance that satisfies the specified `FetchClause`s, or `nil` if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchOne<D>(_ from: From<D>, _ fetchClauses: [FetchClause]) throws -> D? {
+    public func fetchOne<O>(_ from: From<O>, _ fetchClauses: [FetchClause]) throws -> O? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchOne(from, fetchClauses)
     }
@@ -126,9 +126,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func fetchOne<B: FetchChainableBuilderType>(_ clauseChain: B) throws -> B.ObjectType? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchOne(clauseChain)
     }
@@ -141,11 +141,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: all `DynamicObject` instances that satisfy the specified `FetchClause`s, or an empty array if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchAll<D>(_ from: From<D>, _ fetchClauses: FetchClause...) throws -> [D] {
+    public func fetchAll<O>(_ from: From<O>, _ fetchClauses: FetchClause...) throws -> [O] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchAll(from, fetchClauses)
     }
@@ -158,11 +158,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: all `DynamicObject` instances that satisfy the specified `FetchClause`s, or an empty array if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchAll<D>(_ from: From<D>, _ fetchClauses: [FetchClause]) throws -> [D] {
+    public func fetchAll<O>(_ from: From<O>, _ fetchClauses: [FetchClause]) throws -> [O] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchAll(from, fetchClauses)
     }
@@ -182,9 +182,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func fetchAll<B: FetchChainableBuilderType>(_ clauseChain: B) throws -> [B.ObjectType] {
 
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchAll(clauseChain)
     }
@@ -197,11 +197,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the number of `DynamicObject`s that satisfy the specified `FetchClause`s
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchCount<D>(_ from: From<D>, _ fetchClauses: FetchClause...) throws -> Int {
+    public func fetchCount<O>(_ from: From<O>, _ fetchClauses: FetchClause...) throws -> Int {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchCount(from, fetchClauses)
     }
@@ -214,11 +214,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the number of `DynamicObject`s that satisfy the specified `FetchClause`s
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchCount<D>(_ from: From<D>, _ fetchClauses: [FetchClause]) throws -> Int {
+    public func fetchCount<O>(_ from: From<O>, _ fetchClauses: [FetchClause]) throws -> Int {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchCount(from, fetchClauses)
     }
@@ -238,9 +238,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func fetchCount<B: FetchChainableBuilderType>(_ clauseChain: B) throws -> Int {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchCount(clauseChain)
     }
@@ -253,11 +253,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the `NSManagedObjectID` for the first `DynamicObject` that satisfies the specified `FetchClause`s, or `nil` if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchObjectID<D>(_ from: From<D>, _ fetchClauses: FetchClause...) throws -> NSManagedObjectID? {
+    public func fetchObjectID<O>(_ from: From<O>, _ fetchClauses: FetchClause...) throws -> NSManagedObjectID? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectID(from, fetchClauses)
     }
@@ -270,11 +270,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the `NSManagedObjectID` for the first `DynamicObject` that satisfies the specified `FetchClause`s, or `nil` if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchObjectID<D>(_ from: From<D>, _ fetchClauses: [FetchClause]) throws -> NSManagedObjectID? {
+    public func fetchObjectID<O>(_ from: From<O>, _ fetchClauses: [FetchClause]) throws -> NSManagedObjectID? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectID(from, fetchClauses)
     }
@@ -294,9 +294,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func fetchObjectID<B: FetchChainableBuilderType>(_ clauseChain: B) throws -> NSManagedObjectID? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectID(clauseChain)
     }
@@ -309,11 +309,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the `NSManagedObjectID` for all `DynamicObject`s that satisfy the specified `FetchClause`s, or an empty array if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchObjectIDs<D>(_ from: From<D>, _ fetchClauses: FetchClause...) throws -> [NSManagedObjectID] {
+    public func fetchObjectIDs<O>(_ from: From<O>, _ fetchClauses: FetchClause...) throws -> [NSManagedObjectID] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectIDs(from, fetchClauses)
     }
@@ -326,11 +326,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the `NSManagedObjectID` for all `DynamicObject`s that satisfy the specified `FetchClause`s, or an empty array if no match was found
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func fetchObjectIDs<D>(_ from: From<D>, _ fetchClauses: [FetchClause]) throws -> [NSManagedObjectID] {
+    public func fetchObjectIDs<O>(_ from: From<O>, _ fetchClauses: [FetchClause]) throws -> [NSManagedObjectID] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectIDs(from, fetchClauses)
     }
@@ -350,9 +350,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func fetchObjectIDs<B: FetchChainableBuilderType>(_ clauseChain: B) throws -> [NSManagedObjectID] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to fetch from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to fetch from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.fetchObjectIDs(clauseChain)
     }
@@ -371,11 +371,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the result of the the query, or `nil` if no match was found. The type of the return value is specified by the generic type of the `Select<U>` parameter.
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func queryValue<D, U: QueryableAttributeType>(_ from: From<D>, _ selectClause: Select<D, U>, _ queryClauses: QueryClause...) throws -> U? {
+    public func queryValue<O, U: QueryableAttributeType>(_ from: From<O>, _ selectClause: Select<O, U>, _ queryClauses: QueryClause...) throws -> U? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryValue(from, selectClause, queryClauses)
     }
@@ -391,11 +391,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the result of the the query, or `nil` if no match was found. The type of the return value is specified by the generic type of the `Select<U>` parameter.
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func queryValue<D, U: QueryableAttributeType>(_ from: From<D>, _ selectClause: Select<D, U>, _ queryClauses: [QueryClause]) throws -> U? {
+    public func queryValue<O, U: QueryableAttributeType>(_ from: From<O>, _ selectClause: Select<O, U>, _ queryClauses: [QueryClause]) throws -> U? {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryValue(from, selectClause, queryClauses)
     }
@@ -417,9 +417,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func queryValue<B: QueryChainableBuilderType>(_ clauseChain: B) throws -> B.ResultType? where B.ResultType: QueryableAttributeType {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryValue(clauseChain.from, clauseChain.select, clauseChain.queryClauses)
     }
@@ -435,11 +435,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the result of the the query. The type of the return value is specified by the generic type of the `Select<U>` parameter.
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func queryAttributes<D>(_ from: From<D>, _ selectClause: Select<D, NSDictionary>, _ queryClauses: QueryClause...) throws -> [[String: Any]] {
+    public func queryAttributes<O>(_ from: From<O>, _ selectClause: Select<O, NSDictionary>, _ queryClauses: QueryClause...) throws -> [[String: Any]] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryAttributes(from, selectClause, queryClauses)
     }
@@ -455,11 +455,11 @@ extension DataStack: FetchableSource, QueryableSource {
      - returns: the result of the the query. The type of the return value is specified by the generic type of the `Select<U>` parameter.
      - throws: `CoreStoreError.persistentStoreNotFound` if the specified entity could not be found in any store's schema.
      */
-    public func queryAttributes<D>(_ from: From<D>, _ selectClause: Select<D, NSDictionary>, _ queryClauses: [QueryClause]) throws -> [[String: Any]] {
+    public func queryAttributes<O>(_ from: From<O>, _ selectClause: Select<O, NSDictionary>, _ queryClauses: [QueryClause]) throws -> [[String: Any]] {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryAttributes(from, selectClause, queryClauses)
     }
@@ -490,9 +490,9 @@ extension DataStack: FetchableSource, QueryableSource {
      */
     public func queryAttributes<B: QueryChainableBuilderType>(_ clauseChain: B) throws -> [[String: Any]] where B.ResultType == NSDictionary {
         
-        CoreStore.assert(
+        Internals.assert(
             Thread.isMainThread,
-            "Attempted to query from a \(cs_typeName(self)) outside the main thread."
+            "Attempted to query from a \(Internals.typeName(self)) outside the main thread."
         )
         return try self.mainContext.queryAttributes(clauseChain.from, clauseChain.select, clauseChain.queryClauses)
     }

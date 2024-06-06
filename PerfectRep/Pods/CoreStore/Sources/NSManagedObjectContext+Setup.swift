@@ -43,7 +43,7 @@ extension NSManagedObjectContext {
                 return parentContext.parentStack
             }
             
-            return cs_getAssociatedObjectForKey(&PropertyKeys.parentStack, inObject: self)
+            return Internals.getAssociatedObjectForKey(&PropertyKeys.parentStack, inObject: self)
         }
         set {
             
@@ -52,7 +52,7 @@ extension NSManagedObjectContext {
                 return
             }
             
-            cs_setAssociatedWeakObject(
+            Internals.setAssociatedWeakObject(
                 newValue,
                 forKey: &PropertyKeys.parentStack,
                 inObject: self
@@ -71,7 +71,7 @@ extension NSManagedObjectContext {
         
         #if os(iOS) || os(macOS)
             
-        context.observerForDidImportUbiquitousContentChangesNotification = NotificationObserver(
+        context.observerForDidImportUbiquitousContentChangesNotification = Internals.NotificationObserver(
             notificationName: NSNotification.Name("com.apple.coredata.ubiquity.importer.didfinishimport"), // NSNotification.Name.NSPersistentStoreDidImportUbiquitousContentChanges (used string literals to silence deprecation warning)
             object: coordinator,
             closure: { [weak context] (note) -> Void in
@@ -103,7 +103,7 @@ extension NSManagedObjectContext {
         context.mergePolicy = NSRollbackMergePolicy
         context.undoManager = nil
         context.setupForCoreStoreWithContextName("com.corestore.maincontext")
-        context.observerForDidSaveNotification = NotificationObserver(
+        context.observerForDidSaveNotification = Internals.NotificationObserver(
             notificationName: NSNotification.Name.NSManagedObjectContextDidSave,
             object: rootContext,
             closure: { [weak context] (note) -> Void in
@@ -113,6 +113,10 @@ extension NSManagedObjectContext {
                         
                         return
                 }
+                
+                let saveMetadata = rootContext.saveMetadata
+                context.saveMetadata = saveMetadata
+                
                 let mergeChanges = { () -> Void in
                     
                     if let updatedObjects = (note.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject>) {
@@ -123,8 +127,9 @@ extension NSManagedObjectContext {
                         }
                     }
                     context.mergeChanges(fromContextDidSave: note)
+                    context.saveMetadata = nil
                 }
-                if rootContext.isSavingSynchronously == true {
+                if case true? = saveMetadata?.isSavingSynchronously {
                     
                     context.performAndWait(mergeChanges)
                 }
@@ -148,18 +153,18 @@ extension NSManagedObjectContext {
     }
     
     @nonobjc
-    private var observerForDidSaveNotification: NotificationObserver? {
+    private var observerForDidSaveNotification: Internals.NotificationObserver? {
         
         get {
             
-            return cs_getAssociatedObjectForKey(
+            return Internals.getAssociatedObjectForKey(
                 &PropertyKeys.observerForDidSaveNotification,
                 inObject: self
             )
         }
         set {
             
-            cs_setAssociatedRetainedObject(
+            Internals.setAssociatedRetainedObject(
                 newValue,
                 forKey: &PropertyKeys.observerForDidSaveNotification,
                 inObject: self
@@ -168,18 +173,18 @@ extension NSManagedObjectContext {
     }
     
     @nonobjc
-    private var observerForDidImportUbiquitousContentChangesNotification: NotificationObserver? {
+    private var observerForDidImportUbiquitousContentChangesNotification: Internals.NotificationObserver? {
         
         get {
             
-            return cs_getAssociatedObjectForKey(
+            return Internals.getAssociatedObjectForKey(
                 &PropertyKeys.observerForDidImportUbiquitousContentChangesNotification,
                 inObject: self
             )
         }
         set {
             
-            cs_setAssociatedRetainedObject(
+            Internals.setAssociatedRetainedObject(
                 newValue,
                 forKey: &PropertyKeys.observerForDidImportUbiquitousContentChangesNotification,
                 inObject: self
