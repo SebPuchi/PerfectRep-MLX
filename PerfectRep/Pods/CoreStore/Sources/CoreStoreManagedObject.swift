@@ -33,6 +33,7 @@ import Foundation
     
     internal typealias CustomGetter = @convention(block) (_ rawObject: Any) -> Any?
     internal typealias CustomSetter = @convention(block) (_ rawObject: Any, _ newValue: Any?) -> Void
+    internal typealias CustomInitializer = @convention(block) (_ rawObject: Any) -> Void
     internal typealias CustomGetterSetter = (getter: CustomGetter?, setter: CustomSetter?)
     
     @nonobjc @inline(__always)
@@ -47,6 +48,6 @@ import Foundation
 
 private enum Static {
     
-    static let queue = DispatchQueue.concurrent("com.coreStore.coreStoreManagerObjectBarrierQueue")
+    static let queue = DispatchQueue.concurrent("com.coreStore.coreStoreManagerObjectBarrierQueue", qos: .userInteractive)
     static var cache: [ObjectIdentifier: [KeyPathString: Set<KeyPathString>]] = [:]
 }

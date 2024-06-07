@@ -76,9 +76,9 @@ extension DataStack {
             catch {
                 
                 let storeError = CoreStoreError(error)
-                CoreStore.log(
+                Internals.log(
                     storeError,
-                    "Failed to add \(cs_typeName(storage)) to the stack."
+                    "Failed to add \(Internals.typeName(storage)) to the stack."
                 )
                 DispatchQueue.main.async {
                     
@@ -108,9 +108,9 @@ extension DataStack {
     public func addStorage<T: LocalStorage>(_ storage: T, completion: @escaping (SetupResult<T>) -> Void) -> Progress? {
         
         let fileURL = storage.fileURL
-        CoreStore.assert(
+        Internals.assert(
             fileURL.isFileURL,
-            "The specified URL for the \(cs_typeName(storage)) is invalid: \"\(fileURL)\""
+            "The specified URL for the \(Internals.typeName(storage)) is invalid: \"\(fileURL)\""
         )
         
         return self.coordinator.performSynchronously {
@@ -137,9 +137,9 @@ extension DataStack {
                 }
                 
                 let error = CoreStoreError.differentStorageExistsAtURL(existingPersistentStoreURL: fileURL)
-                CoreStore.log(
+                Internals.log(
                     error,
-                    "Failed to add \(cs_typeName(storage)) at \"\(fileURL)\" because a different \(cs_typeName(NSPersistentStore.self)) at that URL already exists."
+                    "Failed to add \(Internals.typeName(storage)) at \"\(fileURL)\" because a different \(Internals.typeName(NSPersistentStore.self)) at that URL already exists."
                 )
                 DispatchQueue.main.async {
                     
@@ -235,151 +235,15 @@ extension DataStack {
             catch {
                 
                 let storeError = CoreStoreError(error)
-                CoreStore.log(
+                Internals.log(
                     storeError,
-                    "Failed to load SQLite \(cs_typeName(NSPersistentStore.self)) metadata."
+                    "Failed to load SQLite \(Internals.typeName(NSPersistentStore.self)) metadata."
                 )
                 DispatchQueue.main.async {
                     
                     completion(.failure(storeError))
                 }
                 return nil
-            }
-        }
-    }
-    
-    /**
-     Asynchronously adds a `CloudStorage` to the stack. Migrations are also initiated by default.
-     ```
-     guard let storage = ICloudStore(
-         ubiquitousContentName: "MyAppCloudData",
-         ubiquitousContentTransactionLogsSubdirectory: "logs/config1",
-         ubiquitousContainerID: "iCloud.com.mycompany.myapp.containername",
-         ubiquitousPeerToken: "9614d658014f4151a95d8048fb717cf0",
-         configuration: "Config1",
-         cloudStorageOptions: .recreateLocalStoreOnModelMismatch
-     ) else {
-         // iCloud is not available on the device
-         return
-     }
-     dataStack.addStorage(
-         storage,
-         completion: { result in
-             switch result {
-             case .success(let storage): // ...
-             case .failure(let error): // ...
-             }
-         }
-     )
-     ```
-     - parameter storage: the cloud storage
-     - parameter completion: the closure to be executed on the main queue when the process completes, either due to success or failure. The closure's `SetupResult` argument indicates the result. Note that the `CloudStorage` associated to the `SetupResult.success` may not always be the same instance as the parameter argument if a previous `CloudStorage` was already added at the same URL and with the same configuration.
-     */
-    public func addStorage<T: CloudStorage>(_ storage: T, completion: @escaping (SetupResult<T>) -> Void)  {
-        
-        let cacheFileURL = storage.cacheFileURL
-        self.coordinator.performSynchronously {
-            
-            if let _ = self.persistentStoreForStorage(storage) {
-                
-                DispatchQueue.main.async {
-                    
-                    completion(.success(storage))
-                }
-                return
-            }
-            
-            if let persistentStore = self.coordinator.persistentStore(for: cacheFileURL as URL) {
-                
-                if let existingStorage = persistentStore.storageInterface as? T,
-                    storage.matchesPersistentStore(persistentStore) {
-                    
-                    DispatchQueue.main.async {
-                        
-                        completion(.success(existingStorage))
-                    }
-                    return
-                }
-                
-                let error = CoreStoreError.differentStorageExistsAtURL(existingPersistentStoreURL: cacheFileURL)
-                CoreStore.log(
-                    error,
-                    "Failed to add \(cs_typeName(storage)) at \"\(cacheFileURL)\" because a different \(cs_typeName(NSPersistentStore.self)) at that URL already exists."
-                )
-                DispatchQueue.main.async {
-                    
-                    completion(.failure(error))
-                }
-                return
-            }
-            
-            do {
-                
-                var cloudStorageOptions = storage.cloudStorageOptions
-                cloudStorageOptions.remove(.recreateLocalStoreOnModelMismatch)
-                
-                let storeOptions = storage.dictionary(forOptions: cloudStorageOptions)
-                do {
-                    
-                    _ = try self.createPersistentStoreFromStorage(
-                        storage,
-                        finalURL: cacheFileURL,
-                        finalStoreOptions: storeOptions
-                    )
-                    DispatchQueue.main.async {
-                        
-                        completion(.success(storage))
-                    }
-                }
-                catch let error as NSError where storage.cloudStorageOptions.contains(.recreateLocalStoreOnModelMismatch) && error.isCoreDataMigrationError {
-                    
-                    let finalStoreOptions = storage.dictionary(forOptions: storage.cloudStorageOptions)
-                    let metadata = try NSPersistentStoreCoordinator.metadataForPersistentStore(
-                        ofType: type(of: storage).storeType,
-                        at: cacheFileURL,
-                        options: storeOptions
-                    )
-                    _ = try self.schemaHistory
-                        .schema(for: metadata)
-                        .flatMap({ try storage.cs_eraseStorageAndWait(soureModel: $0.rawModel()) })
-                    _ = try self.createPersistentStoreFromStorage(
-                        storage,
-                        finalURL: cacheFileURL,
-                        finalStoreOptions: finalStoreOptions
-                    )
-                }
-            }
-            catch let error as NSError
-                where error.code == NSFileReadNoSuchFileError && error.domain == NSCocoaErrorDomain {
-                    
-                    do {
-                        
-                        _ = try self.addStorageAndWait(storage)
-                        
-                        DispatchQueue.main.async {
-                            
-                            completion(.success(storage))
-                        }
-                    }
-                    catch {
-                        
-                        DispatchQueue.main.async {
-                            
-                            completion(.failure(CoreStoreError(error)))
-                        }
-                    }
-            }
-            catch {
-                
-                let storeError = CoreStoreError(error)
-                CoreStore.log(
-                    storeError,
-                    "Failed to load \(cs_typeName(NSPersistentStore.self)) metadata."
-                )
-                DispatchQueue.main.async {
-                    
-                    completion(.failure(storeError))
-                }
             }
         }
     }
@@ -399,9 +263,9 @@ extension DataStack {
             let fileURL = storage.fileURL
             do {
                 
-                CoreStore.assert(
+                Internals.assert(
                     self.persistentStoreForStorage(storage) == nil,
-                    "Attempted to migrate an already added \(cs_typeName(storage)) at URL \"\(fileURL)\""
+                    "Attempted to migrate an already added \(Internals.typeName(storage)) at URL \"\(fileURL)\""
                 )
                 
                 let metadata = try NSPersistentStoreCoordinator.metadataForPersistentStore(
@@ -418,9 +282,9 @@ extension DataStack {
             catch {
                 
                 let metadataError = CoreStoreError(error)
-                CoreStore.log(
+                Internals.log(
                     metadataError,
-                    "Failed to load \(cs_typeName(storage)) metadata from URL \"\(fileURL)\"."
+                    "Failed to load \(Internals.typeName(storage)) metadata from URL \"\(fileURL)\"."
                 )
                 throw metadataError
             }
@@ -440,9 +304,9 @@ extension DataStack {
             
             let fileURL = storage.fileURL
             
-            CoreStore.assert(
+            Internals.assert(
                 self.persistentStoreForStorage(storage) == nil,
-                "Attempted to query required migrations for an already added \(cs_typeName(storage)) at URL \"\(fileURL)\""
+                "Attempted to query required migrations for an already added \(Internals.typeName(storage)) at URL \"\(fileURL)\""
             )
             do {
                 
@@ -459,9 +323,9 @@ extension DataStack {
                         targetModel: self.schemaHistory.rawModel,
                         targetModelVersion: self.modelVersion
                     )
-                    CoreStore.log(
+                    Internals.log(
                         error,
-                        "Failed to find migration steps from the \(cs_typeName(storage)) at URL \"\(fileURL)\" to version model \"\(self.modelVersion)\"."
+                        "Failed to find migration steps from the \(Internals.typeName(storage)) at URL \"\(fileURL)\" to version model \"\(self.modelVersion)\"."
                     )
                     throw error
                 }
@@ -469,9 +333,9 @@ extension DataStack {
                 if migrationSteps.count > 1 && storage.localStorageOptions.contains(.preventProgressiveMigration) {
                     
                     let error = CoreStoreError.progressiveMigrationRequired(localStoreURL: fileURL)
-                    CoreStore.log(
+                    Internals.log(
                         error,
-                        "Failed to find migration mapping from the \(cs_typeName(storage)) at URL \"\(fileURL)\" to version model \"\(self.modelVersion)\" without requiring progessive migrations."
+                        "Failed to find migration mapping from the \(Internals.typeName(storage)) at URL \"\(fileURL)\" to version model \"\(self.modelVersion)\" without requiring progessive migrations."
                     )
                     throw error
                 }
@@ -486,9 +350,9 @@ extension DataStack {
             catch {
                 
                 let metadataError = CoreStoreError(error)
-                CoreStore.log(
+                Internals.log(
                     metadataError,
-                    "Failed to load \(cs_typeName(storage)) metadata from URL \"\(fileURL)\"."
+                    "Failed to load \(Internals.typeName(storage)) metadata from URL \"\(fileURL)\"."
                 )
                 throw metadataError
             }
@@ -507,9 +371,9 @@ extension DataStack {
                 targetModel: self.schemaHistory.rawModel,
                 targetModelVersion: self.modelVersion
             )
-            CoreStore.log(
+            Internals.log(
                 error,
-                "Failed to find migration steps from \(cs_typeName(storage)) at URL \"\(storage.fileURL)\" to version model \"\(self.schemaHistory.rawModel)\"."
+                "Failed to find migration steps from \(Internals.typeName(storage)) at URL \"\(storage.fileURL)\" to version model \"\(self.schemaHistory.rawModel)\"."
             )
             
             DispatchQueue.main.async {
@@ -532,9 +396,9 @@ extension DataStack {
         else if numberOfMigrations > 1 && storage.localStorageOptions.contains(.preventProgressiveMigration) {
             
             let error = CoreStoreError.progressiveMigrationRequired(localStoreURL: storage.fileURL)
-            CoreStore.log(
+            Internals.log(
                 error,
-                "Failed to find migration mapping from the \(cs_typeName(storage)) at URL \"\(storage.fileURL)\" to version model \"\(self.modelVersion)\" without requiring progessive migrations."
+                "Failed to find migration mapping from the \(Internals.typeName(storage)) at URL \"\(storage.fileURL)\" to version model \"\(self.modelVersion)\" without requiring progessive migrations."
             )
             DispatchQueue.main.async {
                 
@@ -561,7 +425,7 @@ extension DataStack {
             operations.append(
                 BlockOperation { [weak self] in
                     
-                    guard let `self` = self, !cancelled else {
+                    guard let self = self, !cancelled else {
                         
                         return
                     }
@@ -582,7 +446,7 @@ extension DataStack {
                         catch {
                         
                             let migrationError = CoreStoreError(error)
-                            CoreStore.log(
+                            Internals.log(
                                 migrationError,
                                 "Failed to migrate version model \"\(migrationType.sourceVersion)\" to version \"\(migrationType.destinationVersion)\"."
                             )
@@ -593,7 +457,7 @@ extension DataStack {
                     
                     DispatchQueue.main.async {
                         
-                        _ = withExtendedLifetime(childProgress) { (_: Progress) -> Void in }
+                        withExtendedLifetime(childProgress) { (_: Progress) -> Void in }
                     }
                 }
             )
@@ -749,16 +613,7 @@ extension DataStack {
             }
         }
         let fileManager = FileManager.default
-        let systemTemporaryDirectoryURL: URL
-        if #available(macOS 10.12, *) {
-
-            systemTemporaryDirectoryURL = fileManager.temporaryDirectory
-        }
-        else {
-
-            systemTemporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
-        }
-        let temporaryDirectoryURL = systemTemporaryDirectoryURL
+        let temporaryDirectoryURL = fileManager.temporaryDirectory
             .appendingPathComponent(Bundle.main.bundleIdentifier ?? "com.CoreStore.DataStack")
             .appendingPathComponent(ProcessInfo().globallyUniqueString)
 
@@ -778,7 +633,7 @@ extension DataStack {
             isDirectory: false
         )
         
-        let migrationManager = MigrationManager(
+        let migrationManager = Internals.MigrationManager(
             sourceModel: sourceModel,
             destinationModel: destinationModel,
             progress: progress

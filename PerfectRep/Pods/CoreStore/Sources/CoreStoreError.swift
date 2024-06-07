@@ -78,6 +78,29 @@ public enum CoreStoreError: Error, CustomNSError, Hashable {
      Attempted to perform a fetch but could not find any related persistent store.
      */
     case persistentStoreNotFound(entity: DynamicObject.Type)
+
+    /**
+     Casts any `Error` to a known `CoreStoreError`, or wraps it in `CoreStoreError.internalError(NSError:)`.
+     */
+    public init(_ error: Error?) {
+
+        guard let error = error else {
+
+            self = .unknown
+            return
+        }
+        switch error {
+
+        case let error as CoreStoreError:
+            self = error
+
+        case let error as NSError:
+            self = .internalError(NSError: error)
+
+        default:
+            self = .unknown
+        }
+    }
     
     
     // MARK: CustomNSError
@@ -198,9 +221,6 @@ public enum CoreStoreError: Error, CustomNSError, Hashable {
             
         case (.userError(let error1), .userError(let error2)):
             switch (error1, error2) {
-                
-            case (let error1 as AnyHashable, let error2 as AnyHashable):
-                return error1 == error2
             
             case (let error1 as NSError, let error2 as NSError):
                 return error1.isEqual(error2)
@@ -255,14 +275,6 @@ public enum CoreStoreError: Error, CustomNSError, Hashable {
         case .userCancelled:
             break
         }
-    }
-
-    
-    // MARK: Internal
-    
-    internal init(_ error: Error?) {
-        
-        self = error.flatMap({ $0.bridgeToSwift }) ?? .unknown
     }
 }
 

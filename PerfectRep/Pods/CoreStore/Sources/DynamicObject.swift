@@ -35,9 +35,19 @@ import CoreData
 public protocol DynamicObject: AnyObject {
     
     /**
+     The object ID for this instance
+     */
+    typealias ObjectID = NSManagedObjectID
+    
+    /**
      Used internally by CoreStore. Do not call directly.
      */
     static func cs_forceCreate(entityDescription: NSEntityDescription, into context: NSManagedObjectContext, assignTo store: NSPersistentStore) -> Self
+    
+    /**
+     Used internally by CoreStore. Do not call directly.
+     */
+    static func cs_snapshotDictionary(id: ObjectID, context: NSManagedObjectContext) -> [String: Any]?
     
     /**
      Used internally by CoreStore. Do not call directly.
@@ -52,12 +62,23 @@ public protocol DynamicObject: AnyObject {
     /**
      Used internally by CoreStore. Do not call directly.
      */
-    func cs_id() -> NSManagedObjectID
+    func cs_toRaw() -> NSManagedObject
     
     /**
      Used internally by CoreStore. Do not call directly.
      */
-    func cs_toRaw() -> NSManagedObject
+    func cs_id() -> ObjectID
+}
+
+extension DynamicObject {
+    
+    // MARK: Internal
+    
+    internal func runtimeType() -> Self.Type {
+        
+        // Self.self does not return runtime-created types
+        return object_getClass(self)! as! Self.Type
+    }
 }
 
 
@@ -76,10 +97,32 @@ extension NSManagedObject: DynamicObject {
         }
         return object
     }
+
+    public class func cs_snapshotDictionary(id: ObjectID, context: NSManagedObjectContext) -> [String: Any]? {
+
+        guard let object = context.fetchExisting(id) as NSManagedObject? else {
+
+            return nil
+        }
+        let rawObject = object.cs_toRaw()
+        var dictionary = rawObject.dictionaryWithValues(forKeys: Array(rawObject.entity.attributesByName.keys))
+        for case (let key, let target as NSManagedObject) in rawObject.dictionaryWithValues(forKeys: Array(rawObject.entity.relationshipsByName.keys)) {
+
+            dictionary[key] = target.objectID
+        }
+        return dictionary
+    }
     
     public class func cs_fromRaw(object: NSManagedObject) -> Self {
-        
+
+#if swift(>=5.9)
         return unsafeDowncast(object, to: self)
+
+#else
+        // unsafeDowncast fails debug assertion starting Swift 5.2
+        return _unsafeUncheckedDowncast(object, to: self)
+
+#endif
     }
     
     public static func cs_matches(object: NSManagedObject) -> Bool {
@@ -87,14 +130,14 @@ extension NSManagedObject: DynamicObject {
         return object.isKind(of: self)
     }
     
-    public func cs_id() -> NSManagedObjectID {
-        
-        return self.objectID
-    }
-    
     public func cs_toRaw() -> NSManagedObject {
         
         return self
+    }
+    
+    public func cs_id() -> ObjectID {
+        
+        return self.objectID
     }
 }
 
@@ -114,6 +157,108 @@ extension CoreStoreObject {
             context.assign(object, to: store)
         }
         return self.cs_fromRaw(object: object)
+    }
+
+    public class func cs_snapshotDictionary(id: ObjectID, context: NSManagedObjectContext) -> [String: Any]? {
+
+        var values: [KeyPathString: Any] = [:]
+        if self.meta.needsReflection {
+
+            func initializeAttributes(mirror: Mirror, object: Self, into attributes: inout [KeyPathString: Any]) {
+
+                if let superClassMirror = mirror.superclassMirror {
+
+                    initializeAttributes(
+                        mirror: superClassMirror,
+                        object: object,
+                        into: &attributes
+                    )
+                }
+                for child in mirror.children {
+
+                    switch child.value {
+
+                    case let property as FieldAttributeProtocol:
+                        Internals.assert(
+                            object.rawObject?.isRunningInAllowedQueue() == true,
+                            "Attempted to access \(Internals.typeName(type(of: property).dynamicObjectType))'s value outside it's designated queue."
+                        )
+                        attributes[property.keyPath] = type(of: property).read(
+                            field: property,
+                            for: object.rawObject!
+                        )
+
+                    case let property as FieldRelationshipProtocol:
+                        Internals.assert(
+                            object.rawObject?.isRunningInAllowedQueue() == true,
+                            "Attempted to access \(Internals.typeName(type(of: property).dynamicObjectType))'s value outside it's designated queue."
+                        )
+                        attributes[property.keyPath] = type(of: property).valueForSnapshot(
+                            field: property,
+                            for: object.rawObject!
+                        )
+
+                    case let property as AttributeProtocol:
+                        attributes[property.keyPath] = property.valueForSnapshot
+
+                    case let property as RelationshipProtocol:
+                        attributes[property.keyPath] = property.valueForSnapshot
+
+                    default:
+                        continue
+                    }
+                }
+            }
+            guard let object = context.fetchExisting(id) as CoreStoreObject? else {
+
+                return nil
+            }
+            initializeAttributes(
+                mirror: Mirror(reflecting: object),
+                object: object as! Self,
+                into: &values
+            )
+        }
+        else {
+
+            guard
+                let object = context.fetchExisting(id) as CoreStoreObject?,
+                let rawObject = object.rawObject,
+                !rawObject.isDeleted
+                else {
+
+                    return nil
+            }
+            for property in self.metaProperties(includeSuperclasses: true) {
+
+                switch property {
+
+                case let property as FieldAttributeProtocol:
+                    Internals.assert(
+                        object.rawObject?.isRunningInAllowedQueue() == true,
+                        "Attempted to access \(Internals.typeName(type(of: property).dynamicObjectType))'s value outside it's designated queue."
+                    )
+                    values[property.keyPath] = type(of: property).read(
+                        field: property,
+                        for: rawObject
+                    )
+
+                case let property as FieldRelationshipProtocol:
+                    Internals.assert(
+                        object.rawObject?.isRunningInAllowedQueue() == true,
+                        "Attempted to access \(Internals.typeName(type(of: property).dynamicObjectType))'s value outside it's designated queue."
+                    )
+                    values[property.keyPath] = type(of: property).valueForSnapshot(
+                        field: property,
+                        for: object.rawObject!
+                    )
+
+                default:
+                    continue
+                }
+            }
+        }
+        return values
     }
     
     public class func cs_fromRaw(object: NSManagedObject) -> Self {
@@ -140,13 +285,13 @@ extension CoreStoreObject {
         return (self as AnyClass).isSubclass(of: type as AnyClass)
     }
     
-    public func cs_id() -> NSManagedObjectID {
-        
-        return self.rawObject!.objectID
-    }
-    
     public func cs_toRaw() -> NSManagedObject {
         
         return self.rawObject!
+    }
+    
+    public func cs_id() -> ObjectID {
+        
+        return self.rawObject!.objectID
     }
 }

@@ -43,7 +43,7 @@ import Foundation
      let pet = Relationship.ToOne<Animal>("pet", inverse: { $0.master })
  }
  
- CoreStore.defaultStack = DataStack(
+ CoreStoreDefaults.dataStack = DataStack(
      CoreStoreSchema(
          modelVersion: "V1",
          entities: [
@@ -76,7 +76,7 @@ public final class CoreStoreSchema: DynamicSchema {
          let pet = Relationship.ToOne<Animal>("pet", inverse: { $0.master })
      }
      
-     CoreStore.defaultStack = DataStack(
+     CoreStoreDefaults.dataStack = DataStack(
          CoreStoreSchema(
              modelVersion: "V1",
              entities: [
@@ -120,7 +120,7 @@ public final class CoreStoreSchema: DynamicSchema {
          let name = Value.Required<String>("name", initial: "")
      }
      
-     CoreStore.defaultStack = DataStack(
+     CoreStoreDefaults.dataStack = DataStack(
          CoreStoreSchema(
              modelVersion: "V1",
              entityConfigurations: [
@@ -161,8 +161,8 @@ public final class CoreStoreSchema: DynamicSchema {
         let allEntities = Set(entityConfigurations.keys)
         actualEntitiesByConfiguration[DataStack.defaultConfigurationName] = allEntities
         
-        CoreStore.assert(
-            cs_lazy {
+        Internals.assert(
+            Internals.with {
                 
                 let expectedCount = allEntities.count
                 return Set(allEntities.map({ ObjectIdentifier($0.type) })).count == expectedCount
@@ -177,17 +177,17 @@ public final class CoreStoreSchema: DynamicSchema {
         
         if let versionLock = versionLock {
             
-            CoreStore.assert(
+            Internals.assert(
                 versionLock == VersionLock(entityVersionHashesByName: self.rawModel().entityVersionHashesByName),
-                "A \(cs_typeName(VersionLock.self)) was provided for the \(cs_typeName(CoreStoreSchema.self)) with version \"\(modelVersion)\", but the actual hashes do not match. This may result in unwanted migrations or unusable persistent stores.\nExpected lock values: \(versionLock)\nActual lock values: \(VersionLock(entityVersionHashesByName: self.rawModel().entityVersionHashesByName))"
+                "A \(Internals.typeName(VersionLock.self)) was provided for the \(Internals.typeName(CoreStoreSchema.self)) with version \"\(modelVersion)\", but the actual hashes do not match. This may result in unwanted migrations or unusable persistent stores.\nExpected lock values: \(versionLock)\nActual lock values: \(VersionLock(entityVersionHashesByName: self.rawModel().entityVersionHashesByName))"
             )
         }
         else {
             
             #if DEBUG
-                CoreStore.log(
+                Internals.log(
                     .notice,
-                    message: "These are hashes for the \(cs_typeName(CoreStoreSchema.self)) with version name \"\(modelVersion)\". Copy the dictionary below and pass it to the \(cs_typeName(CoreStoreSchema.self)) initializer's \"versionLock\" argument:\nversionLock: \(VersionLock(entityVersionHashesByName: self.rawModel().entityVersionHashesByName))"
+                    message: "These are hashes for the \(Internals.typeName(CoreStoreSchema.self)) with version name \"\(modelVersion)\". Copy the dictionary below and pass it to the \(Internals.typeName(CoreStoreSchema.self)) initializer's \"versionLock\" argument:\nversionLock: \(VersionLock(entityVersionHashesByName: self.rawModel().entityVersionHashesByName))"
                 )
             #endif
         }
@@ -209,20 +209,26 @@ public final class CoreStoreSchema: DynamicSchema {
             let rawModel = NSManagedObjectModel()
             var entityDescriptionsByEntity: [DynamicEntity: NSEntityDescription] = [:]
             var allCustomGettersSetters: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]] = [:]
+            var allCustomInitializers: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomInitializer]] = [:]
+            var allFieldCoders: [DynamicEntity: [KeyPathString: Internals.AnyFieldCoder]] = [:]
             for entity in self.allEntities {
                 
-                let (entityDescription, customGetterSetterByKeyPaths) = self.entityDescription(
+                let (entityDescription, customGetterSetterByKeyPaths, customInitializerByKeyPaths, fieldCoders) = self.entityDescription(
                     for: entity,
                     initializer: CoreStoreSchema.firstPassCreateEntityDescription(from:in:)
                 )
                 entityDescriptionsByEntity[entity] = (entityDescription.copy() as! NSEntityDescription)
                 allCustomGettersSetters[entity] = customGetterSetterByKeyPaths
+                allCustomInitializers[entity] = customInitializerByKeyPaths
+                allFieldCoders[entity] = fieldCoders
             }
             CoreStoreSchema.secondPassConnectRelationshipAttributes(for: entityDescriptionsByEntity)
             CoreStoreSchema.thirdPassConnectInheritanceTreeAndIndexes(for: entityDescriptionsByEntity)
             CoreStoreSchema.fourthPassSynthesizeManagedObjectClasses(
                 for: entityDescriptionsByEntity,
-                allCustomGettersSetters: allCustomGettersSetters
+                allCustomGettersSetters: allCustomGettersSetters,
+                allCustomInitializers: allCustomInitializers,
+                allFieldCoders: allFieldCoders
             )
             
             rawModel.entities = entityDescriptionsByEntity.values.sorted(by: { $0.name! < $1.name! })
@@ -248,28 +254,63 @@ public final class CoreStoreSchema: DynamicSchema {
     
     // MARK: Private
     
-    private static let barrierQueue = DispatchQueue.concurrent("com.coreStore.coreStoreDataModelBarrierQueue")
+    private static let barrierQueue = DispatchQueue.concurrent("com.coreStore.coreStoreDataModelBarrierQueue", qos: .userInteractive)
     
     private let allEntities: Set<DynamicEntity>
     
     private var entityDescriptionsByEntity: [DynamicEntity: NSEntityDescription] = [:]
     private var customGettersSettersByEntity: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]] = [:]
+    private var customInitializersByEntity: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomInitializer]] = [:]
+    private var fieldCodersByEntity: [DynamicEntity: [KeyPathString: Internals.AnyFieldCoder]] = [:]
     private weak var cachedRawModel: NSManagedObjectModel?
     
-    private func entityDescription(for entity: DynamicEntity, initializer: (DynamicEntity, ModelVersion) -> (entity: NSEntityDescription, customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter])) -> (entity: NSEntityDescription, customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]) {
+    private func entityDescription(
+        for entity: DynamicEntity,
+        initializer: (DynamicEntity, ModelVersion) -> (
+            entity: NSEntityDescription,
+            customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter],
+            customInitializerByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomInitializer],
+            fieldCoders: [KeyPathString: Internals.AnyFieldCoder]
+        )
+    ) -> (
+        entity: NSEntityDescription,
+        customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter],
+        customInitializerByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomInitializer],
+        fieldCoders: [KeyPathString: Internals.AnyFieldCoder]
+    ) {
         
         if let cachedEntityDescription = self.entityDescriptionsByEntity[entity] {
             
-            return (cachedEntityDescription, self.customGettersSettersByEntity[entity] ?? [:])
+            return (
+                cachedEntityDescription,
+                self.customGettersSettersByEntity[entity] ?? [:],
+                self.customInitializersByEntity[entity] ?? [:],
+                self.fieldCodersByEntity[entity] ?? [:]
+            )
         }
         let modelVersion = self.modelVersion
-        let (entityDescription, customGetterSetterByKeyPaths) = withoutActuallyEscaping(initializer, do: { $0(entity, modelVersion) })
+        let (entityDescription, customGetterSetterByKeyPaths, customInitializerByKeyPaths, fieldCoders) = withoutActuallyEscaping(
+            initializer,
+            do: { $0(entity, modelVersion) }
+        )
         self.entityDescriptionsByEntity[entity] = entityDescription
         self.customGettersSettersByEntity[entity] = customGetterSetterByKeyPaths
-        return (entityDescription, customGetterSetterByKeyPaths)
+        self.customInitializersByEntity[entity] = customInitializerByKeyPaths
+        self.fieldCodersByEntity[entity] = fieldCoders
+        return (
+            entityDescription,
+            customGetterSetterByKeyPaths,
+            customInitializerByKeyPaths,
+            fieldCoders
+        )
     }
-    
-    private static func firstPassCreateEntityDescription(from entity: DynamicEntity, in modelVersion: ModelVersion) -> (entity: NSEntityDescription, customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]) {
+
+    private static func firstPassCreateEntityDescription(from entity: DynamicEntity, in modelVersion: ModelVersion) -> (
+        entity: NSEntityDescription,
+        customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter],
+        customInitializerByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomInitializer],
+        fieldCoders: [KeyPathString: Internals.AnyFieldCoder]
+    ) {
         
         let entityDescription = NSEntityDescription()
         entityDescription.coreStoreEntity = entity
@@ -279,47 +320,94 @@ public final class CoreStoreSchema: DynamicSchema {
         entityDescription.managedObjectClassName = CoreStoreManagedObject.cs_subclassName(for: entity, in: modelVersion)
         
         var keyPathsByAffectedKeyPaths: [KeyPathString: Set<KeyPathString>] = [:]
+        var customInitialValuesByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomInitializer] = [:]
         var customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter] = [:]
+        var fieldCoders: [KeyPathString: Internals.AnyFieldCoder] = [:]
         func createProperties(for type: CoreStoreObject.Type) -> [NSPropertyDescription] {
             
             var propertyDescriptions: [NSPropertyDescription] = []
-            for child in Mirror(reflecting: type.meta).children {
+            for property in type.metaProperties(includeSuperclasses: false) {
                 
-                switch child.value {
-                    
-                case let attribute as AttributeProtocol:
-                    CoreStore.assert(
+                switch property {
+
+                case let attribute as FieldAttributeProtocol:
+                    Internals.assert(
                         !NSManagedObject.instancesRespond(to: Selector(attribute.keyPath)),
                         "Attribute Property name \"\(String(reflecting: entity.type)).\(attribute.keyPath)\" is not allowed because it collides with \"\(String(reflecting: NSManagedObject.self)).\(attribute.keyPath)\""
                     )
+                    let entityDescriptionValues = attribute.entityDescriptionValues()
                     let description = NSAttributeDescription()
                     description.name = attribute.keyPath
-                    description.attributeType = Swift.type(of: attribute).attributeType
-                    description.isOptional = attribute.isOptional
-                    description.defaultValue = attribute.defaultValue()
-                    description.isTransient = attribute.isTransient
-                    description.allowsExternalBinaryDataStorage = attribute.allowsExternalBinaryDataStorage
-                    description.versionHashModifier = attribute.versionHashModifier()
-                    description.renamingIdentifier = attribute.renamingIdentifier()
+                    description.attributeType = entityDescriptionValues.attributeType
+                    description.isOptional = entityDescriptionValues.isOptional
+                    description.defaultValue = entityDescriptionValues.defaultValue
+                    description.isTransient = entityDescriptionValues.isTransient
+                    description.allowsExternalBinaryDataStorage = entityDescriptionValues.allowsExternalBinaryDataStorage
+                    description.versionHashModifier = entityDescriptionValues.versionHashModifier
+                    description.renamingIdentifier = entityDescriptionValues.renamingIdentifier
+
+                    let valueTransformer = entityDescriptionValues.valueTransformer
+                    description.valueTransformerName = valueTransformer?.transformerName.rawValue
+
                     propertyDescriptions.append(description)
-                    keyPathsByAffectedKeyPaths[attribute.keyPath] = attribute.affectedByKeyPaths()
+
+                    keyPathsByAffectedKeyPaths[attribute.keyPath] = entityDescriptionValues.affectedByKeyPaths
                     customGetterSetterByKeyPaths[attribute.keyPath] = (attribute.getter, attribute.setter)
-                    
-                case let relationship as RelationshipProtocol:
-                    CoreStore.assert(
+                    customInitialValuesByKeyPaths[attribute.keyPath] = attribute.initializer
+                    fieldCoders[attribute.keyPath] = valueTransformer
+
+                case let relationship as FieldRelationshipProtocol:
+                    Internals.assert(
                         !NSManagedObject.instancesRespond(to: Selector(relationship.keyPath)),
                         "Relationship Property name \"\(String(reflecting: entity.type)).\(relationship.keyPath)\" is not allowed because it collides with \"\(String(reflecting: NSManagedObject.self)).\(relationship.keyPath)\""
                     )
+                    let entityDescriptionValues = relationship.entityDescriptionValues()
                     let description = NSRelationshipDescription()
                     description.name = relationship.keyPath
-                    description.minCount = relationship.minCount
-                    description.maxCount = relationship.maxCount
-                    description.isOrdered = relationship.isOrdered
-                    description.deleteRule = relationship.deleteRule
-                    description.versionHashModifier = relationship.versionHashModifier()
-                    description.renamingIdentifier = relationship.renamingIdentifier()
+                    description.minCount = entityDescriptionValues.minCount
+                    description.maxCount = entityDescriptionValues.maxCount
+                    description.isOrdered = entityDescriptionValues.isOrdered
+                    description.deleteRule = entityDescriptionValues.deleteRule
+                    description.versionHashModifier = entityDescriptionValues.versionHashModifier
+                    description.renamingIdentifier = entityDescriptionValues.renamingIdentifier
                     propertyDescriptions.append(description)
-                    keyPathsByAffectedKeyPaths[relationship.keyPath] = relationship.affectedByKeyPaths()
+                    keyPathsByAffectedKeyPaths[relationship.keyPath] = entityDescriptionValues.affectedByKeyPaths
+                    
+                case let attribute as AttributeProtocol:
+                    Internals.assert(
+                        !NSManagedObject.instancesRespond(to: Selector(attribute.keyPath)),
+                        "Attribute Property name \"\(String(reflecting: entity.type)).\(attribute.keyPath)\" is not allowed because it collides with \"\(String(reflecting: NSManagedObject.self)).\(attribute.keyPath)\""
+                    )
+                    let entityDescriptionValues = attribute.entityDescriptionValues()
+                    let description = NSAttributeDescription()
+                    description.name = attribute.keyPath
+                    description.attributeType = entityDescriptionValues.attributeType
+                    description.isOptional = entityDescriptionValues.isOptional
+                    description.defaultValue = entityDescriptionValues.defaultValue
+                    description.isTransient = entityDescriptionValues.isTransient
+                    description.allowsExternalBinaryDataStorage = entityDescriptionValues.allowsExternalBinaryDataStorage
+                    description.versionHashModifier = entityDescriptionValues.versionHashModifier
+                    description.renamingIdentifier = entityDescriptionValues.renamingIdentifier
+                    propertyDescriptions.append(description)
+                    keyPathsByAffectedKeyPaths[attribute.keyPath] = entityDescriptionValues.affectedByKeyPaths
+                    customGetterSetterByKeyPaths[attribute.keyPath] = (attribute.getter, attribute.setter)
+                    
+                case let relationship as RelationshipProtocol:
+                    Internals.assert(
+                        !NSManagedObject.instancesRespond(to: Selector(relationship.keyPath)),
+                        "Relationship Property name \"\(String(reflecting: entity.type)).\(relationship.keyPath)\" is not allowed because it collides with \"\(String(reflecting: NSManagedObject.self)).\(relationship.keyPath)\""
+                    )
+                    let entityDescriptionValues = relationship.entityDescriptionValues()
+                    let description = NSRelationshipDescription()
+                    description.name = relationship.keyPath
+                    description.minCount = entityDescriptionValues.minCount
+                    description.maxCount = entityDescriptionValues.maxCount
+                    description.isOrdered = entityDescriptionValues.isOrdered
+                    description.deleteRule = entityDescriptionValues.deleteRule
+                    description.versionHashModifier = entityDescriptionValues.versionHashModifier
+                    description.renamingIdentifier = entityDescriptionValues.renamingIdentifier
+                    propertyDescriptions.append(description)
+                    keyPathsByAffectedKeyPaths[relationship.keyPath] = entityDescriptionValues.affectedByKeyPaths
                     
                 default:
                     continue
@@ -329,7 +417,12 @@ public final class CoreStoreSchema: DynamicSchema {
         }
         entityDescription.properties = createProperties(for: entity.type as! CoreStoreObject.Type)
         entityDescription.keyPathsByAffectedKeyPaths = keyPathsByAffectedKeyPaths
-        return (entityDescription, customGetterSetterByKeyPaths)
+        return (
+            entityDescription,
+            customGetterSetterByKeyPaths,
+            customInitialValuesByKeyPaths,
+            fieldCoders
+        )
     }
     
     private static func secondPassConnectRelationshipAttributes(for entityDescriptionsByEntity: [DynamicEntity: NSEntityDescription]) {
@@ -352,13 +445,13 @@ public final class CoreStoreSchema: DynamicSchema {
             }
             if matchedEntities.isEmpty {
                 
-                CoreStore.abort(
-                    "No \(cs_typeName("Entity<\(type)>")) instance found in the \(cs_typeName(CoreStoreSchema.self))."
+                Internals.abort(
+                    "No \(Internals.typeName("Entity<\(type)>")) instance found in the \(Internals.typeName(CoreStoreSchema.self))."
                 )
             }
             else {
                 
-                CoreStore.abort(
+                Internals.abort(
                     "Ambiguous entity types or entity names were found in the model. Ensure that the entity types and entity names are unique to each other. Entities: \(matchedEntities)"
                 )
             }
@@ -370,25 +463,46 @@ public final class CoreStoreSchema: DynamicSchema {
                 
                 return relationshipDescription
             }
-            CoreStore.abort(
-                "The inverse relationship for \"\(destinationEntity.type).\(destinationKeyPath)\" could not be found. Make sure to set the `inverse:` initializer argument for one of the paired \(cs_typeName("Relationship.ToOne<T>")), \(cs_typeName("Relationship.ToManyOrdered<T>")), or \(cs_typeName("Relationship.ToManyUnozrdered<T>"))"
+            Internals.abort(
+                "The inverse relationship for \"\(destinationEntity.type).\(destinationKeyPath)\" could not be found. Make sure to set the `inverse:` initializer argument for one of the paired \(Internals.typeName("Relationship.ToOne<T>")), \(Internals.typeName("Relationship.ToManyOrdered<T>")), or \(Internals.typeName("Relationship.ToManyUnozrdered<T>"))"
             )
         }
         
         for (entity, entityDescription) in entityDescriptionsByEntity {
             
             let relationshipsByName = relationshipsByNameByEntity[entity]!
-            for child in Mirror(reflecting: (entity.type as! CoreStoreObject.Type).meta).children {
+            let entityType = entity.type as! CoreStoreObject.Type
+            for property in entityType.metaProperties(includeSuperclasses: false) {
                 
-                switch child.value {
+                switch property {
+
+                case let relationship as FieldRelationshipProtocol:
+                    let (destinationType, destinationKeyPath) = relationship.entityDescriptionValues().inverse
+                    let destinationEntity = findEntity(for: destinationType)
+                    let description = relationshipsByName[relationship.keyPath]!
+                    description.destinationEntity = entityDescriptionsByEntity[destinationEntity]!
+
+                    if let destinationKeyPath = destinationKeyPath {
+
+                        let inverseRelationshipDescription = findInverseRelationshipMatching(
+                            destinationEntity: destinationEntity,
+                            destinationKeyPath: destinationKeyPath
+                        )
+                        description.inverseRelationship = inverseRelationshipDescription
+
+                        inverseRelationshipDescription.inverseRelationship = description
+                        inverseRelationshipDescription.destinationEntity = entityDescription
+
+                        description.destinationEntity!.properties = description.destinationEntity!.properties
+                    }
                     
                 case let relationship as RelationshipProtocol:
-                    let (destinationType, destinationKeyPath) = relationship.inverse
+                    let (destinationType, destinationKeyPath) = relationship.entityDescriptionValues().inverse
                     let destinationEntity = findEntity(for: destinationType)
                     let description = relationshipsByName[relationship.keyPath]!
                     description.destinationEntity = entityDescriptionsByEntity[destinationEntity]!
                     
-                    if let destinationKeyPath = destinationKeyPath() {
+                    if let destinationKeyPath = destinationKeyPath {
                         
                         let inverseRelationshipDescription = findInverseRelationshipMatching(
                             destinationEntity: destinationEntity,
@@ -411,13 +525,13 @@ public final class CoreStoreSchema: DynamicSchema {
             
             for (name, relationshipDescription) in entityDescription.relationshipsByName {
                 
-                CoreStore.assert(
+                Internals.assert(
                     relationshipDescription.destinationEntity != nil,
                     "The destination entity for relationship \"\(entity.type).\(name)\" could not be resolved."
                 )
-                CoreStore.assert(
+                Internals.assert(
                     relationshipDescription.inverseRelationship != nil,
-                    "The inverse relationship for \"\(entity.type).\(name)\" could not be found. Make sure to set the `inverse:` argument of the initializer for one of the paired \(cs_typeName("Relationship.ToOne<T>")), \(cs_typeName("Relationship.ToManyOrdered<T>")), or \(cs_typeName("Relationship.ToManyUnozrdered<T>"))"
+                    "The inverse relationship for \"\(entity.type).\(name)\" could not be found. Make sure to set the `inverse:` argument of the initializer for one of the paired \(Internals.typeName("Relationship.ToOne<T>")), \(Internals.typeName("Relationship.ToManyOrdered<T>")), or \(Internals.typeName("Relationship.ToManyUnozrdered<T>"))"
                 )
             }
         }
@@ -450,18 +564,14 @@ public final class CoreStoreSchema: DynamicSchema {
             )
         }
         for (entity, entityDescription) in entityDescriptionsByEntity {
+            
+            if entity.uniqueConstraints.contains(where: { !$0.isEmpty }) {
 
-            if #available(macOS 10.11, *) {
-                
-                let uniqueConstraints = entity.uniqueConstraints.filter({ !$0.isEmpty })
-                if !uniqueConstraints.isEmpty {
-
-                    CoreStore.assert(
-                        entityDescription.superentity == nil,
-                        "Uniqueness constraints must be defined at the highest level possible."
-                    )
-                    entityDescription.uniquenessConstraints = entity.uniqueConstraints.map { $0.map { $0 as NSString } }
-                }
+                Internals.assert(
+                    entityDescription.superentity == nil,
+                    "Uniqueness constraints must be defined at the highest level possible."
+                )
+                entityDescription.uniquenessConstraints = entity.uniqueConstraints.map { $0.map { $0 as NSString } }
             }
             guard !entity.indexes.isEmpty else {
                 
@@ -472,38 +582,34 @@ public final class CoreStoreSchema: DynamicSchema {
                 entityDescription.coreStoreEntity = entity // reserialize
             }
             let attributesByName = entityDescription.attributesByName
-            if #available(iOS 11.0, macOS 10.13, watchOS 4.0, tvOS 11.0, *) {
+            entityDescription.indexes = entity.indexes.map { (compoundIndexes) in
                 
-                entityDescription.indexes = entity.indexes.map { (compoundIndexes) in
-                    
-                    return NSFetchIndexDescription.init(
-                        name: "_CoreStoreSchema_indexes_\(entityDescription.name!)_\(compoundIndexes.joined(separator: "-"))",
-                        elements: compoundIndexes.map { (keyPath) in
-                            
-                            return NSFetchIndexElementDescription(
-                                property: attributesByName[keyPath]!,
-                                collationType: .binary
-                            )
-                        }
-                    )
-                }
-            }
-            else {
-                
-                entityDescription.compoundIndexes = entity.indexes.map { (compoundIndexes) in
-                    
-                    return compoundIndexes.map { (keyPath) in
+                return NSFetchIndexDescription.init(
+                    name: "_CoreStoreSchema_indexes_\(entityDescription.name!)_\(compoundIndexes.joined(separator: "_"))",
+                    elements: compoundIndexes.map { (keyPath) in
                         
-                        return attributesByName[keyPath]!
+                        return NSFetchIndexElementDescription(
+                            property: attributesByName[keyPath]!,
+                            collationType: .binary
+                        )
                     }
-                }
+                )
             }
         }
     }
     
-    private static func fourthPassSynthesizeManagedObjectClasses(for entityDescriptionsByEntity: [DynamicEntity: NSEntityDescription], allCustomGettersSetters: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]]) {
+    private static func fourthPassSynthesizeManagedObjectClasses(
+        for entityDescriptionsByEntity: [DynamicEntity: NSEntityDescription],
+        allCustomGettersSetters: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]],
+        allCustomInitializers: [DynamicEntity: [KeyPathString: CoreStoreManagedObject.CustomInitializer]],
+        allFieldCoders: [DynamicEntity: [KeyPathString: Internals.AnyFieldCoder]]
+    ) {
         
-        func createManagedObjectSubclass(for entityDescription: NSEntityDescription, customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]?) {
+        func createManagedObjectSubclass(
+            for entityDescription: NSEntityDescription,
+            customGetterSetterByKeyPaths: [KeyPathString: CoreStoreManagedObject.CustomGetterSetter]?,
+            customInitializers: [KeyPathString: CoreStoreManagedObject.CustomInitializer]?
+        ) {
             
             let superEntity = entityDescription.superentity
             let className = entityDescription.managedObjectClassName!
@@ -515,10 +621,11 @@ public final class CoreStoreSchema: DynamicSchema {
                 
                 createManagedObjectSubclass(
                     for: superEntity,
-                    customGetterSetterByKeyPaths: superEntity.coreStoreEntity.flatMap({ allCustomGettersSetters[$0] })
+                    customGetterSetterByKeyPaths: superEntity.coreStoreEntity.flatMap({ allCustomGettersSetters[$0] }),
+                    customInitializers: superEntity.coreStoreEntity.flatMap({ allCustomInitializers[$0] })
                 )
             }
-            let superClass = cs_lazy { () -> CoreStoreManagedObject.Type in
+            let superClass = Internals.with { () -> CoreStoreManagedObject.Type in
                 
                 if let superClassName = superEntity?.managedObjectClassName,
                     let superClass = NSClassFromString(superClassName) {
@@ -562,7 +669,7 @@ public final class CoreStoreSchema: DynamicSchema {
                             imp_implementationWithBlock(getter),
                             "@@:") else {
                                 
-                                CoreStore.abort("Could not dynamically add getter method \"\(getterName)\" to class \(cs_typeName(managedObjectClass))")
+                                Internals.abort("Could not dynamically add getter method \"\(getterName)\" to class \(Internals.typeName(managedObjectClass))")
                         }
                     }
                     if let setter = customGetterSetters.setter {
@@ -574,45 +681,93 @@ public final class CoreStoreSchema: DynamicSchema {
                             imp_implementationWithBlock(setter),
                             "v@:@") else {
                                 
-                                CoreStore.abort("Could not dynamically add setter method \"\(setterName)\" to class \(cs_typeName(managedObjectClass))")
+                                Internals.abort("Could not dynamically add setter method \"\(setterName)\" to class \(Internals.typeName(managedObjectClass))")
                         }
                     }
             }
-            
-            let newSelector = NSSelectorFromString("cs_keyPathsForValuesAffectingValueForKey:")
-            let keyPathsByAffectedKeyPaths = entityDescription.keyPathsByAffectedKeyPaths
-            let keyPathsForValuesAffectingValue: @convention(block) (Any, String) -> Set<String> = { (instance, keyPath) in
-                
-                if let keyPaths = keyPathsByAffectedKeyPaths[keyPath] {
+            swizzle_keyPathsForValuesAffectingValueForKey: do {
+
+                let newSelector = NSSelectorFromString("cs_keyPathsForValuesAffectingValueForKey:")
+                let keyPathsByAffectedKeyPaths = entityDescription.keyPathsByAffectedKeyPaths
+                let keyPathsForValuesAffectingValue: @convention(block) (Any, String) -> Set<String> = { (instance, keyPath) in
                     
-                    return keyPaths
+                    if let keyPaths = keyPathsByAffectedKeyPaths[keyPath] {
+                        
+                        return keyPaths
+                    }
+                    return []
                 }
-                return []
-            }
-            let origSelector = #selector(CoreStoreManagedObject.keyPathsForValuesAffectingValue(forKey:))
-            
-            let metaClass: AnyClass = object_getClass(managedObjectClass)!
-            let origMethod = class_getClassMethod(managedObjectClass, origSelector)!
-            
-            let origImp = method_getImplementation(origMethod)
-            let newImp = imp_implementationWithBlock(keyPathsForValuesAffectingValue)
-            
-            if class_addMethod(metaClass, origSelector, newImp, method_getTypeEncoding(origMethod)) {
+                let origSelector = #selector(CoreStoreManagedObject.keyPathsForValuesAffectingValue(forKey:))
                 
-                class_replaceMethod(metaClass, newSelector, origImp, method_getTypeEncoding(origMethod))
-            }
-            else {
+                let metaClass: AnyClass = object_getClass(managedObjectClass)!
+                let origMethod = class_getClassMethod(managedObjectClass, origSelector)!
                 
-                let newMethod = class_getClassMethod(managedObjectClass, newSelector)!
-                method_exchangeImplementations(origMethod, newMethod)
+                let origImp = method_getImplementation(origMethod)
+                let newImp = imp_implementationWithBlock(keyPathsForValuesAffectingValue)
+                
+                if class_addMethod(metaClass, origSelector, newImp, method_getTypeEncoding(origMethod)) {
+                    
+                    class_replaceMethod(metaClass, newSelector, origImp, method_getTypeEncoding(origMethod))
+                }
+                else {
+                    
+                    let newMethod = class_getClassMethod(managedObjectClass, newSelector)!
+                    method_exchangeImplementations(origMethod, newMethod)
+                }
+            }
+            swizzle_awakeFromInsert: do {
+
+                let newSelector = NSSelectorFromString("cs_awakeFromInsert")
+                let awakeFromInsertValue: @convention(block) (Any) -> Void
+                if let customInitializers = customInitializers,
+                    !customInitializers.isEmpty {
+                    
+                    let initializers = Array(customInitializers.values)
+                    awakeFromInsertValue = { (instance) in
+                        
+                        initializers.forEach {
+                            
+                            $0(instance)
+                        }
+                    }
+                }
+                else {
+                    
+                    awakeFromInsertValue = { _ in }
+                }
+                let origSelector = #selector(CoreStoreManagedObject.awakeFromInsert)
+                
+                let origMethod = class_getInstanceMethod(managedObjectClass, origSelector)!
+                
+                let origImp = method_getImplementation(origMethod)
+                let newImp = imp_implementationWithBlock(awakeFromInsertValue)
+                
+                if class_addMethod(managedObjectClass, origSelector, newImp, method_getTypeEncoding(origMethod)) {
+                    
+                    class_replaceMethod(managedObjectClass, newSelector, origImp, method_getTypeEncoding(origMethod))
+                }
+                else {
+                    
+                    let newMethod = class_getInstanceMethod(managedObjectClass, newSelector)!
+                    method_exchangeImplementations(origMethod, newMethod)
+                }
             }
         }
         for (dynamicEntity, entityDescription) in entityDescriptionsByEntity {
             
             createManagedObjectSubclass(
                 for: entityDescription,
-                customGetterSetterByKeyPaths: allCustomGettersSetters[dynamicEntity]
+                customGetterSetterByKeyPaths: allCustomGettersSetters[dynamicEntity],
+                customInitializers: allCustomInitializers[dynamicEntity]
             )
         }
+
+        allFieldCoders
+            .flatMap({ (_, values) in values })
+            .reduce(
+                into: [:] as [NSValueTransformerName: Internals.AnyFieldCoder],
+                { (result, element) in result[element.value.transformerName] = element.value }
+            )
+            .forEach({ (_, fieldCoder) in fieldCoder.register() })
     }
 }

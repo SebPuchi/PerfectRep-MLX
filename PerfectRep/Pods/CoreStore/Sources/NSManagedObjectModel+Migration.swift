@@ -33,15 +33,25 @@ extension NSManagedObjectModel {
     
     @nonobjc
     internal func cs_resolveNames() -> [String: (entity: NSEntityDescription, versionHash: Data)] {
-        return self.entitiesByName.reduce(into: [:], { (result, entity: (name: String, description: NSEntityDescription)) in
-            result[entity.name] = (entity.description, entity.description.versionHash)
-        })
+
+        return self.entitiesByName.reduce(
+            into: [:],
+            { (result, entity: (key: String, value: NSEntityDescription)) in
+
+                result[entity.key] = (entity.value, entity.value.versionHash)
+            }
+        )
     }
     
     @nonobjc
     internal func cs_resolveRenamingIdentities() -> [String: (entity: NSEntityDescription, versionHash: Data)] {
-        return self.entitiesByName.reduce(into: [:], { (result, entity: (name: String, description: NSEntityDescription)) in
-            result[entity.description.renamingIdentifier ?? entity.name] = (entity.description, entity.description.versionHash)
-        })
+
+        return self.entitiesByName.reduce(
+            into: [:],
+            { (result, entity: (key: String, value: NSEntityDescription)) in
+
+                result[entity.value.renamingIdentifier ?? entity.key] = (entity.value, entity.value.versionHash)
+            }
+        )
     }
 }

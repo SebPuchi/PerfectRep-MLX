@@ -40,14 +40,19 @@ import CoreData
  )
  ```
  */
-@available(macOS 10.12, *)
-public struct SectionMonitorChainBuilder<D: DynamicObject>: SectionMonitorBuilderType {
+public struct SectionMonitorChainBuilder<O: DynamicObject>: SectionMonitorBuilderType {
     
     // MARK: SectionMonitorBuilderType
     
-    public var from: From<D>
-    public var sectionBy: SectionBy<D>
+    public var from: From<O>
+    public var sectionBy: SectionBy<O>
     public var fetchClauses: [FetchClause] = []
+    
+    
+    // MARK: Deprecated
+
+    @available(*, deprecated, renamed: "O")
+    public typealias D = O
 }
 
 
@@ -56,7 +61,6 @@ public struct SectionMonitorChainBuilder<D: DynamicObject>: SectionMonitorBuilde
 /**
  Utility protocol for `SectionMonitorChainBuilder`. Used in methods that support chained fetch builders.
  */
-@available(macOS 10.12, *)
 public protocol SectionMonitorBuilderType {
     
     /**

@@ -38,7 +38,7 @@ import CoreData
      // ...
  }
  
- CoreStore.perform(
+ dataStack.perform(
      asynchronous: { (transaction) -> Void in
          let json: NSDictionary = // ...
          let person = try transaction.importUniqueObject(
@@ -53,7 +53,7 @@ import CoreData
  )
  ```
  */
-public protocol ImportableUniqueObject: ImportableObject {
+public protocol ImportableUniqueObject: ImportableObject, Hashable {
     
     /**
      The data type for the entity's unique ID attribute
@@ -125,7 +125,7 @@ extension ImportableUniqueObject where UniqueIDType.QueryableNativeType: CoreDat
         get {
             
             return self.cs_toRaw().getValue(
-                forKvcKey: cs_dynamicType(of: self).uniqueIDKeyPath,
+                forKvcKey: self.runtimeType().uniqueIDKeyPath,
                 didGetValue: { UniqueIDType.cs_fromQueryableNativeType($0 as! UniqueIDType.QueryableNativeType)! }
             )
         }
@@ -134,7 +134,7 @@ extension ImportableUniqueObject where UniqueIDType.QueryableNativeType: CoreDat
             self.cs_toRaw()
                 .setValue(
                     newValue,
-                    forKvcKey: cs_dynamicType(of: self).uniqueIDKeyPath,
+                    forKvcKey: self.runtimeType().uniqueIDKeyPath,
                     willSetValue: { ($0.cs_toQueryableNativeType() as CoreDataNativeType) }
             )
         }
