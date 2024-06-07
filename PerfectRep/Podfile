@@ -8,7 +8,7 @@ target 'PerfectRep' do
   # Pods for PerfectRep
   pod 'SnapKit'
   pod 'DGCharts'
-  pod 'CoreStore' 
+  pod 'CoreStore', '~> 9.2.0' 
   pod 'CoreGPX'
   pod 'Cache'
 
