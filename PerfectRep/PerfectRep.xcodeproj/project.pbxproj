@@ -24,6 +24,7 @@
 		9E18BA442C17460600F78A5B /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA432C17460600F78A5B /* Workout.swift */; };
 		9E18BA472C1747F200F78A5B /* WorkoutStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA462C1747F200F78A5B /* WorkoutStats.swift */; };
 		9E18BA492C174B6200F78A5B /* RelativeMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA482C174B6200F78A5B /* RelativeMeasurement.swift */; };
+		9E18BA4C2C174BF100F78A5B /* CustomNumberFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA4B2C174BF100F78A5B /* CustomNumberFormatting.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		9E18BA432C17460600F78A5B /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		9E18BA462C1747F200F78A5B /* WorkoutStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStats.swift; sourceTree = "<group>"; };
 		9E18BA482C174B6200F78A5B /* RelativeMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeMeasurement.swift; sourceTree = "<group>"; };
+		9E18BA4B2C174BF100F78A5B /* CustomNumberFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNumberFormatting.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +202,7 @@
 		9E18BA372C16B97700F78A5B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9E18BA4A2C174BD800F78A5B /* Formatting */,
 				9E18BA382C16B98D00F78A5B /* Workout */,
 				9E18BA2E2C124A7700F78A5B /* Data */,
 			);
@@ -237,6 +240,14 @@
 				9E18BA462C1747F200F78A5B /* WorkoutStats.swift */,
 			);
 			path = Stats;
+			sourceTree = "<group>";
+		};
+		9E18BA4A2C174BD800F78A5B /* Formatting */ = {
+			isa = PBXGroup;
+			children = (
+				9E18BA4B2C174BF100F78A5B /* CustomNumberFormatting.swift */,
+			);
+			path = Formatting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +435,7 @@
 				9E18BA3E2C1741E200F78A5B /* ApplicationStateObserver.swift in Sources */,
 				9E18BA472C1747F200F78A5B /* WorkoutStats.swift in Sources */,
 				9E18B9FF2C122CFF00F78A5B /* SceneDelegate.swift in Sources */,
+				9E18BA4C2C174BF100F78A5B /* CustomNumberFormatting.swift in Sources */,
 				9E18BA422C1744AD00F78A5B /* ApplicationStateObservation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
