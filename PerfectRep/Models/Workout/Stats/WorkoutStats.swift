@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 import CoreLocation
 
 class WorkoutStats {
@@ -15,11 +14,8 @@ class WorkoutStats {
     // GENERAL
     /// related workout reference: DON'T ACCESS, ONLY PASS ON TO THREAD SAFE MANAGERS
     let workout: Workout
-    
     let type: Workout.WorkoutType
-    
-    let hasWorkoutEvents: Bool
-    
+        
     
     // DURATION
     let startDate: Date
@@ -41,17 +37,13 @@ class WorkoutStats {
     init(workout: Workout) {
         
         self.workout = workout
-        
         self.type = workout.type
-        
-        self.hasWorkoutEvents = !workout.workoutEvents.isEmpty
-        
         
         self.startDate = workout.startDate.value
         self.endDate = workout.endDate.value
         self.activeDuration = NSMeasurement(doubleValue: workout.activeDuration.value, unit: UnitDuration.seconds)
         
-        self.burnedEnergy = hasEnergyValue ? NSMeasurement(doubleValue: workout.burnedEnergy.value ?? 0, unit: UnitEnergy.kilocalories) : nil
+        self.burnedEnergy = NSMeasurement(doubleValue: workout.burnedEnergy.value ?? 0, unit: UnitEnergy.calories)
         
         
     }

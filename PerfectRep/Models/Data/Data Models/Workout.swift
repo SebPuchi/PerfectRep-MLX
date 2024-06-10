@@ -44,7 +44,7 @@ extension Workout: CustomStringConvertible {
         measurementFormatter.numberFormatter.roundingIncrement = 2
         measurementFormatter.unitOptions = .naturalScale
         
-        let distance = CustomMeasurementFormatting.string(forMeasurement: NSMeasurement(doubleValue: self.distance.value, unit: UnitLength.meters), type: .distance, rounding: .twoDigits)
+
         let duration = CustomMeasurementFormatting.string(forMeasurement: NSMeasurement(doubleValue: self.endDate.value.distance(to: self.startDate.value), unit: UnitDuration.seconds), type: .time, rounding: .twoDigits)
         
         let dateFormatter = DateFormatter()
@@ -53,63 +53,43 @@ extension Workout: CustomStringConvertible {
         let end = dateFormatter.string(from: endDate.value)
         
         guard let energyBurned = self.burnedEnergy.value else {
-            return "Workout(type: \(type.debugDescription), start: \(start), end: \(end), distance: \(distance), duration: \(duration))"
+            return "Workout(type: \(type.debugDescription), start: \(start), end: \(end), duration: \(duration))"
         }
         
-        let energy = CustomMeasurementFormatting.string(forMeasurement: NSMeasurement(doubleValue: energyBurned, unit: UnitEnergy.kilocalories), type: .energy, rounding: .wholeNumbers)
+        let energy = CustomMeasurementFormatting.string(forMeasurement: NSMeasurement(doubleValue: energyBurned, unit: UnitEnergy.calories), type: .energy, rounding: .wholeNumbers)
         
-        return "Workout(type: \(type.debugDescription), start: \(start), end: \(end), distance: \(distance), duration: \(duration), energyBurned: \(energy))"
+        return "Workout(type: \(type.debugDescription), start: \(start), end: \(end), duration: \(duration), energyBurned: \(energy))"
     }
     
     enum WorkoutType: CustomStringConvertible, CustomDebugStringConvertible {
-        case running, walking, cycling, skating, hiking, unknown
+        case squat, bench, deadlift, rdl, unknown
         
         init(rawValue: Int) {
             switch rawValue {
             case 0:
-                self = .running
+                self = .squat
             case 1:
-                self = .walking
+                self = .bench
             case 2:
-                self = .cycling
+                self = .deadlift
             case 3:
-                self = .skating
-            case 4:
-                self = .hiking
+                self = .rdl
             default:
                 self = .unknown
             }
         }
         
-        init?(hkType: HKWorkoutActivityType) {
-            switch hkType {
-            case .running:
-                self = .running
-            case .walking:
-                self = .walking
-            case .cycling:
-                self = .cycling
-            case .skatingSports:
-                self = .skating
-            case .hiking:
-                self = .hiking
-            default:
-                return nil
-            }
-        }
         
         var rawValue: Int {
             switch self {
-            case .running:
+            case .squat:
                 return 0
-            case .walking:
+            case .bench:
                 return 1
-            case .cycling:
+            case .deadlift:
                 return 2
-            case .skating:
+            case .rdl:
                 return 3
-            case .hiking:
-                return 4
             case .unknown:
                 return -1
             }
@@ -117,16 +97,14 @@ extension Workout: CustomStringConvertible {
         
         var description: String {
             switch self {
-            case .running:
-                return LS("Workout.Type.Running")
-            case .walking:
-                return LS("Workout.Type.Walking")
-            case .cycling:
-                return LS("Workout.Type.Cycling")
-            case .skating:
-                return LS("Workout.Type.Skating")
-            case .hiking:
-                return LS("Workout.Type.Hiking")
+            case .squat:
+                return LS("Workout.Type.Squat")
+            case .bench:
+                return LS("Workout.Type.Bench")
+            case .deadlift:
+                return LS("Workout.Type.Deadlift")
+            case .rdl:
+                return LS("Workout.Type.RDL")
             case .unknown:
                 return LS("Workout.Type.Unknown")
             }
@@ -134,52 +112,36 @@ extension Workout: CustomStringConvertible {
         
         var debugDescription: String {
             switch self {
-            case .running:
-                return "Running"
-            case .walking:
-                return "Walking"
-            case .cycling:
-                return "Cycling"
-            case .skating:
-                return "Skating"
-            case .hiking:
-                return "Hiking"
+            case .squat:
+                return "Squat"
+            case .bench:
+                return "Bench"
+            case .deadlift:
+                return "Deadlift"
+            case .rdl:
+                return "RDL"
             case .unknown:
                 return "Unknown"
             }
         }
         
+        
+        //Metabolic Equivalent of Task values TBD SUBJECT TO CHANGE
         var METSpeedMultiplier: Double {
             switch self {
-            case .running:
+            case .squat:
                 return 1.035
-            case .walking, .hiking:
+            case .bench:
                 return 0.655
-            case .cycling:
+            case .deadlift:
                 return 0.450
-            case .skating:
+            case .rdl:
                 return 0.560
             case .unknown:
                 return 0
             }
         }
         
-        var healthKitType: HKWorkoutActivityType {
-            switch self {
-            case .running:
-                return .running
-            case .walking:
-                return .walking
-            case .cycling:
-                return .cycling
-            case .skating:
-                return .skatingSports
-            case .hiking:
-                return .hiking
-            case .unknown:
-                return .other
-            }
-        }
         
     }
     
