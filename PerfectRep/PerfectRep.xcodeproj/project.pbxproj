@@ -103,7 +103,7 @@
 		9E18B9F02C122CFF00F78A5B = {
 			isa = PBXGroup;
 			children = (
-				9E18BA2E2C124A7700F78A5B /* Data */,
+				9E18BA372C16B97700F78A5B /* Models */,
 				9E18B9FB2C122CFF00F78A5B /* PerfectRep */,
 				9E18BA122C122D0100F78A5B /* PerfectRepTests */,
 				9E18BA1C2C122D0100F78A5B /* PerfectRepUITests */,
@@ -176,6 +176,22 @@
 				9E18BA312C124ABA00F78A5B /* PerfectRepV1.swift */,
 			);
 			path = Versions;
+			sourceTree = "<group>";
+		};
+		9E18BA372C16B97700F78A5B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E18BA382C16B98D00F78A5B /* Workout */,
+				9E18BA2E2C124A7700F78A5B /* Data */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9E18BA382C16B98D00F78A5B /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Workout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
