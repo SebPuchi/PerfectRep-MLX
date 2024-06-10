@@ -20,11 +20,13 @@ extension Workout: CustomStringConvertible {
         }
     }
     
+    //  Provides Memory Address of instances of Workouts
     private var tmpAddress: String {
         get {
             return String(format: "%p", unsafeBitCast(self, to: Int.self))
         }
     }
+    
     private static var _stats = [String:WorkoutStats]()
     var cachedStats: WorkoutStats? {
         get {
