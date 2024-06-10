@@ -7,3 +7,13 @@
 
 import Foundation
 import CoreLocation
+
+class WorkoutBuilder: ApplicationStateObserver {
+    
+    
+    
+    
+    
+    
+    
+}
