@@ -16,23 +16,19 @@ struct UserPreferences {
     
     /// saves the users name
     static let name = UserPreference.Optional<String>(key: "name")
-    /// saves the users weight in kg
+    /// saves the users weight in lbs
     static let weight = UserPreference.Optional<Double>(key: "weight")
     
+    //Define standard type as recording workout - will most likely remove this later
     static let standardWorkoutType = UserPreference.Required<Int>(key: "standardWorkoutType", defaultValue: 0)
+    
+    //Examine depend
     static let shouldShowMap = UserPreference.Required<Bool>(key: "shouldShowMap", defaultValue: true)
     static let gpsAccuracy = UserPreference.Optional<Double>(key: "gpsAccuracy", initialValue: nil)
-    static let usePaceForSpeedDisplay = UserPreference.Required<Bool>(key: "usesPaceForRecording", defaultValue: true)
-    static let displayRollingSpeed = UserPreference.Required<Bool>(key: "makeSpeedDisplayRolling", defaultValue: true)
-    
-    static let synchronizeWorkoutsWithAppleHealth = UserPreference.Required<Bool>(key: "savesToAppleHealth", defaultValue: false)
-    static let synchronizeWeightWithAppleHealth = UserPreference.Required<Bool>(key: "synchronizeWeightWithAppleHealth", defaultValue: false)
-    static let automaticallyImportNewHealthWorkouts = UserPreference.Required<Bool>(key: "automaticallyImportNewHealthWorkouts", defaultValue: false)
-    
-    static let distanceMeasurementType = MeasurementUserPreference<UnitLength>(key: "distanceMeasurementType", possibleValues: [.kilometers, .miles])
-    static let altitudeMeasurementType = MeasurementUserPreference<UnitLength>(key: "altitudeMeasurementType", possibleValues: [.meters, .feet], bigUnits: false)
-    static let speedMeasurementType = MeasurementUserPreference<UnitSpeed>(key: "speedMeasurementType", possibleValues: [.kilometersPerHour, .milesPerHour])
+  
+
     static let energyMeasurementType = MeasurementUserPreference<UnitEnergy>(key: "energyMeasurementType", possibleValues: [.kilojoules, .kilocalories])
+    
     static let weightMeasurementType = MeasurementUserPreference<UnitMass>(key: "weightMeasurementType", possibleValues: [.kilograms, .pounds])
     
     static func reset() {
