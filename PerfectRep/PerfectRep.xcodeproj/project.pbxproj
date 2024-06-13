@@ -37,6 +37,7 @@
 		9E18BA632C1AAF5100F78A5B /* CustomMeasurementFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA622C1AAF5100F78A5B /* CustomMeasurementFormatting.swift */; };
 		9E18BA662C1AB39700F78A5B /* TextInputSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA652C1AB39700F78A5B /* TextInputSetting.swift */; };
 		9E18BA6A2C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA692C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift */; };
+		9E18BA6C2C1AB5DC00F78A5B /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA6B2C1AB5DC00F78A5B /* UILabel.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		9E18BA622C1AAF5100F78A5B /* CustomMeasurementFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMeasurementFormatting.swift; sourceTree = "<group>"; };
 		9E18BA652C1AB39700F78A5B /* TextInputSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputSetting.swift; sourceTree = "<group>"; };
 		9E18BA692C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoidanceSetting.swift; sourceTree = "<group>"; };
+		9E18BA6B2C1AB5DC00F78A5B /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				9E18BA552C175E0500F78A5B /* Units.swift */,
+				9E18BA6B2C1AB5DC00F78A5B /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				9E18BA012C122CFF00F78A5B /* ViewController.swift in Sources */,
 				9E18BA3B2C173BF700F78A5B /* WorkoutBuilder.swift in Sources */,
 				9E18B9FD2C122CFF00F78A5B /* AppDelegate.swift in Sources */,
+				9E18BA6C2C1AB5DC00F78A5B /* UILabel.swift in Sources */,
 				9E18BA582C17748500F78A5B /* UnitConversion.swift in Sources */,
 				9E18BA492C174B6200F78A5B /* RelativeMeasurement.swift in Sources */,
 				9E18BA442C17460600F78A5B /* Workout.swift in Sources */,
