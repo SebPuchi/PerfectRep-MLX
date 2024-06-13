@@ -35,6 +35,7 @@
 		9E18BA5F2C17788A00F78A5B /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA5E2C17788A00F78A5B /* SettingsModel.swift */; };
 		9E18BA612C177A9200F78A5B /* LS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA602C177A9200F78A5B /* LS.swift */; };
 		9E18BA632C1AAF5100F78A5B /* CustomMeasurementFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA622C1AAF5100F78A5B /* CustomMeasurementFormatting.swift */; };
+		9E18BA662C1AB39700F78A5B /* TextInputSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA652C1AB39700F78A5B /* TextInputSetting.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		9E18BA5E2C17788A00F78A5B /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		9E18BA602C177A9200F78A5B /* LS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LS.swift; sourceTree = "<group>"; };
 		9E18BA622C1AAF5100F78A5B /* CustomMeasurementFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMeasurementFormatting.swift; sourceTree = "<group>"; };
+		9E18BA652C1AB39700F78A5B /* TextInputSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputSetting.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -298,10 +300,19 @@
 		9E18BA5B2C1777DA00F78A5B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				9E18BA642C1AB37700F78A5B /* Seatting Models */,
 				9E18BA5C2C1777F100F78A5B /* SettingsSection.swift */,
 				9E18BA5E2C17788A00F78A5B /* SettingsModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		9E18BA642C1AB37700F78A5B /* Seatting Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E18BA652C1AB39700F78A5B /* TextInputSetting.swift */,
+			);
+			path = "Seatting Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +510,7 @@
 				9E18BA5F2C17788A00F78A5B /* SettingsModel.swift in Sources */,
 				9E18BA632C1AAF5100F78A5B /* CustomMeasurementFormatting.swift in Sources */,
 				9E18BA512C174DB500F78A5B /* UserPreference.swift in Sources */,
+				9E18BA662C1AB39700F78A5B /* TextInputSetting.swift in Sources */,
 				9E18BA4C2C174BF100F78A5B /* CustomNumberFormatting.swift in Sources */,
 				9E18BA422C1744AD00F78A5B /* ApplicationStateObservation.swift in Sources */,
 			);
