@@ -101,25 +101,12 @@ class SettingsModel {
                             UserPreferences.weight.value = weightValue
                             setting.refresh()
                             
-                            if UserPreferences.synchronizeWeightWithAppleHealth.value {
-                                
-                                let measurement = NSMeasurement(doubleValue: weightValue, unit: UnitMass.kilograms)
-                                HealthStoreManager.syncWeight(measurement: measurement) { (success) in
-                                    if !success {
-                                        print("Failed to sync weight with Apple Health")
-                                    }
-                                }
-                                
-                            }
                         }
                     )
             ]),
             SettingSection(
                 title: LS("Settings.UnitPreferences"),
                 settings: [
-                    UserPreferences.distanceMeasurementType.setting(forTitle: LS("Settings.DistanceUnit")),
-                    UserPreferences.altitudeMeasurementType.setting(forTitle: LS("Settings.AltitudeUnit")),
-                    UserPreferences.speedMeasurementType.setting(forTitle: LS("Settings.SpeedUnit")),
                     UserPreferences.energyMeasurementType.setting(forTitle: LS("Settings.EnergyUnit")),
                     UserPreferences.weightMeasurementType.setting(forTitle: LS("Settings.WeightUnit"))
             ]),
