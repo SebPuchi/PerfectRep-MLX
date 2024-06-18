@@ -268,68 +268,15 @@ class SettingsModel {
                                                 }
                                             }
                                         }
-                                            
-                                        let appleHealthAlert = UIAlertController(
-                                            title: LS("Settings.DeleteAll.AppleHealth.Title"),
-                                            message: LS("Settings.DeleteAll.AppleHealth.Message"),
-                                            preferredStyle: .alert,
-                                            options: [
-                                                (
-                                                    title: LS("Delete"),
-                                                    style: .destructive,
-                                                    action: { _ in
-                                                        deleteData {
-                                                            DispatchQueue.main.async {
-                                                                HealthStoreManager.deleteAllHealthWorkouts { (success) in
-                                                                    controller.endLoading() {
-                                                                        if !success {
-                                                                            let errorAlert = UIAlertController(
-                                                                                title: LS("Settings.DeleteAll.AppleHealth.Error.Title"),
-                                                                                message: LS("Settings.DeleteAll.AppleHealth.Error.Message"),
-                                                                                preferredStyle: .alert,
-                                                                                options: [
-                                                                                    (
-                                                                                        title: LS("Okay"),
-                                                                                        style: .cancel,
-                                                                                        action: nil
-                                                                                    )
-                                                                                ]
-                                                                            )
-                                                                            controller.present(errorAlert, animated: true)
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                ),
-                                                (
-                                                    title: LS("Keep"),
-                                                    style: .default,
-                                                    action: { _ in
-                                                        deleteData()
-                                                }
-                                                )
-                                            ]
-                                        )
-                                        
-                                        DispatchQueue.main.async {
-                                            controller.present(appleHealthAlert, animated: true)
-                                        }
+                                                                                    
                                 }
                                     
-                                    ),
-                                (
-                                    title: LS("Cancel"),
-                                    style: .cancel,
-                                    action: nil
                                     )
+                                
                             ])
                             
-                            controller.present(alert, animated: true)
-                            
-                        },
-                        buttonColor: .red
+                        }
+                
                     )
             ]),
             SettingSection(
