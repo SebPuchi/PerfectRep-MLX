@@ -304,10 +304,10 @@ class SettingsModel {
                     ),
                     TitleSubTitleSetting(
                         title: LS("Settings.Email"),
-                        subTitle: "outrun@tadris.de",
+                        subTitle: "perfectrep@gmail.com",
                         doesRedirect: true,
                         selectAction: { (setting, controller, cell) in
-                            guard let url = URL(string: "mailto:outrun@tadris.de?subject=OutRun") else {
+                            guard let url = URL(string: "mailto:perfectrep@gmail.com?subject=PerfectRep") else {
                                 return
                             }
                             UIApplication.shared.open(url) { (success) in
@@ -322,7 +322,7 @@ class SettingsModel {
                         subTitle: "github.com",
                         doesRedirect: true,
                         selectAction: { (setting, controller, cell) in
-                            guard let url = URL(string: "https://github.com/timfraedrich/OutRun") else {
+                            guard let url = URL(string: "https://github.com/SebPuchi/PerfectRep-MLX") else {
                                 return
                             }
                             UIApplication.shared.open(url) { (success) in
@@ -335,7 +335,7 @@ class SettingsModel {
             ]),
             SettingSection(
                 title: LS("Settings.AppInfo"),
-                message: "ⓒ 2020 Tim Fraedrich\n\n",
+                message: "ⓒ 2024 Sebastian Pucher\n\n",
                 settings: [
                     TitleSubTitleSetting(
                         title: LS("Settings.AppVersion"),
