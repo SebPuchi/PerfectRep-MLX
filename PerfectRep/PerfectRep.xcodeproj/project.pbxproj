@@ -43,6 +43,7 @@
 		9E18BA722C21EE7E00F78A5B /* SelectionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA712C21EE7E00F78A5B /* SelectionSetting.swift */; };
 		9E18BA742C21EFA700F78A5B /* SwitchSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA732C21EFA700F78A5B /* SwitchSetting.swift */; };
 		9E18BA762C21F12A00F78A5B /* ButtonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA752C21F12A00F78A5B /* ButtonSetting.swift */; };
+		9E18BA782C22116200F78A5B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA772C22116200F78A5B /* UIColor.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		9E18BA712C21EE7E00F78A5B /* SelectionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSetting.swift; sourceTree = "<group>"; };
 		9E18BA732C21EFA700F78A5B /* SwitchSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchSetting.swift; sourceTree = "<group>"; };
 		9E18BA752C21F12A00F78A5B /* ButtonSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSetting.swift; sourceTree = "<group>"; };
+		9E18BA772C22116200F78A5B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -309,6 +311,7 @@
 			children = (
 				9E18BA552C175E0500F78A5B /* Units.swift */,
 				9E18BA6B2C1AB5DC00F78A5B /* UILabel.swift */,
+				9E18BA772C22116200F78A5B /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				9E18BA472C1747F200F78A5B /* WorkoutStats.swift in Sources */,
 				9E18BA722C21EE7E00F78A5B /* SelectionSetting.swift in Sources */,
 				9E18BA562C175E0500F78A5B /* Units.swift in Sources */,
+				9E18BA782C22116200F78A5B /* UIColor.swift in Sources */,
 				9E18BA532C17551A00F78A5B /* MeasurementUserPreference.swift in Sources */,
 				9E18BA4F2C174D5C00F78A5B /* UserPreferences.swift in Sources */,
 				9E18B9FF2C122CFF00F78A5B /* SceneDelegate.swift in Sources */,
