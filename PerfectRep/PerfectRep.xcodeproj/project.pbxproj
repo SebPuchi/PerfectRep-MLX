@@ -45,6 +45,7 @@
 		9E18BA762C21F12A00F78A5B /* ButtonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA752C21F12A00F78A5B /* ButtonSetting.swift */; };
 		9E18BA782C22116200F78A5B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA772C22116200F78A5B /* UIColor.swift */; };
 		9E18BA7C2C22140100F78A5B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA7B2C22140100F78A5B /* SettingsViewController.swift */; };
+		9E18BA7E2C2215CE00F78A5B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		9E18BA752C21F12A00F78A5B /* ButtonSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSetting.swift; sourceTree = "<group>"; };
 		9E18BA772C22116200F78A5B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		9E18BA7B2C22140100F78A5B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,6 +317,7 @@
 				9E18BA552C175E0500F78A5B /* Units.swift */,
 				9E18BA6B2C1AB5DC00F78A5B /* UILabel.swift */,
 				9E18BA772C22116200F78A5B /* UIColor.swift */,
+				9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				9E18BA702C1AB87B00F78A5B /* TitleSubTitleSetting.swift in Sources */,
 				9E18BA5A2C17750F00F78A5B /* Setting.swift in Sources */,
 				9E18BA6E2C1AB80C00F78A5B /* TitleSetting.swift in Sources */,
+				9E18BA7E2C2215CE00F78A5B /* UIViewController.swift in Sources */,
 				9E18BA6A2C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift in Sources */,
 				9E18BA3E2C1741E200F78A5B /* ApplicationStateObserver.swift in Sources */,
 				9E18BA5D2C1777F100F78A5B /* SettingsSection.swift in Sources */,
