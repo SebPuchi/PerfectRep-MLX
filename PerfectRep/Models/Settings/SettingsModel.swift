@@ -134,11 +134,10 @@ class SettingsModel {
                                             )
                                         }
                                         return [
-                                            selectionSetting(withType: .running),
-                                            selectionSetting(withType: .walking),
-                                            selectionSetting(withType: .hiking),
-                                            selectionSetting(withType: .cycling),
-                                            selectionSetting(withType: .skating)
+                                            selectionSetting(withType: .squat),
+                                            selectionSetting(withType: .bench),
+                                            selectionSetting(withType: .deadlift),
+                                            selectionSetting(withType: .rdl)
                                         ]
                                     }()
                                 )
