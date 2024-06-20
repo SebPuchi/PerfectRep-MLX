@@ -70,6 +70,7 @@
 		9E18BAAE2C2492E500F78A5B /* SmallStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */; };
 		9E18BAB02C24930E00F78A5B /* BigStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAF2C24930E00F78A5B /* BigStatView.swift */; };
 		9E18BAB22C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */; };
+		9E18BAB42C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +160,7 @@
 		9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallStatView.swift; sourceTree = "<group>"; };
 		9E18BAAF2C24930E00F78A5B /* BigStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigStatView.swift; sourceTree = "<group>"; };
 		9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
+		9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempWorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -335,6 +337,7 @@
 				9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */,
 				9E18BAAF2C24930E00F78A5B /* BigStatView.swift */,
 				9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */,
+				9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				9E18BAAE2C2492E500F78A5B /* SmallStatView.swift in Sources */,
 				9E18BA8C2C248B9100F78A5B /* UIImage.swift in Sources */,
 				9E18BA472C1747F200F78A5B /* WorkoutStats.swift in Sources */,
+				9E18BAB42C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift in Sources */,
 				9E18BA722C21EE7E00F78A5B /* SelectionSetting.swift in Sources */,
 				9E18BA562C175E0500F78A5B /* Units.swift in Sources */,
 				9E18BA782C22116200F78A5B /* UIColor.swift in Sources */,
