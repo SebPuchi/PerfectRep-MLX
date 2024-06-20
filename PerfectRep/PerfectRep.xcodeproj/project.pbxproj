@@ -58,6 +58,7 @@
 		9E18BA942C248DD700F78A5B /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA932C248DD700F78A5B /* UITextView.swift */; };
 		9E18BA962C248E0C00F78A5B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA952C248E0C00F78A5B /* Array.swift */; };
 		9E18BA982C248E3E00F78A5B /* UnitCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA972C248E3E00F78A5B /* UnitCount.swift */; };
+		9E18BA9A2C248E9100F78A5B /* ClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA992C248E9100F78A5B /* ClosedRange.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		9E18BA932C248DD700F78A5B /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		9E18BA952C248E0C00F78A5B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		9E18BA972C248E3E00F78A5B /* UnitCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCount.swift; sourceTree = "<group>"; };
+		9E18BA992C248E9100F78A5B /* ClosedRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedRange.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,6 +356,7 @@
 				9E18BA932C248DD700F78A5B /* UITextView.swift */,
 				9E18BA952C248E0C00F78A5B /* Array.swift */,
 				9E18BA972C248E3E00F78A5B /* UnitCount.swift */,
+				9E18BA992C248E9100F78A5B /* ClosedRange.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E18BA322C124ABA00F78A5B /* PerfectRepV1.swift in Sources */,
+				9E18BA9A2C248E9100F78A5B /* ClosedRange.swift in Sources */,
 				9E18BA402C1742E900F78A5B /* ApplicationState.swift in Sources */,
 				9E18BA012C122CFF00F78A5B /* ViewController.swift in Sources */,
 				9E18BA3B2C173BF700F78A5B /* WorkoutBuilder.swift in Sources */,
