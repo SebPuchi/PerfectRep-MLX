@@ -54,6 +54,7 @@
 		9E18BA8C2C248B9100F78A5B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA8B2C248B9100F78A5B /* UIImage.swift */; };
 		9E18BA8E2C248CE600F78A5B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA8D2C248CE600F78A5B /* UIAlertController.swift */; };
 		9E18BA902C248D3800F78A5B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA8F2C248D3800F78A5B /* UITextField.swift */; };
+		9E18BA922C248D9600F78A5B /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA912C248D9600F78A5B /* Date.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,7 @@
 		9E18BA8B2C248B9100F78A5B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		9E18BA8D2C248CE600F78A5B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		9E18BA8F2C248D3800F78A5B /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		9E18BA912C248D9600F78A5B /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -342,6 +344,7 @@
 				9E18BA8B2C248B9100F78A5B /* UIImage.swift */,
 				9E18BA8D2C248CE600F78A5B /* UIAlertController.swift */,
 				9E18BA8F2C248D3800F78A5B /* UITextField.swift */,
+				9E18BA912C248D9600F78A5B /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				9E18BA5F2C17788A00F78A5B /* SettingsModel.swift in Sources */,
 				9E18BA632C1AAF5100F78A5B /* CustomMeasurementFormatting.swift in Sources */,
 				9E18BA512C174DB500F78A5B /* UserPreference.swift in Sources */,
+				9E18BA922C248D9600F78A5B /* Date.swift in Sources */,
 				9E18BA662C1AB39700F78A5B /* TextInputSetting.swift in Sources */,
 				9E18BA4C2C174BF100F78A5B /* CustomNumberFormatting.swift in Sources */,
 				9E18BA8A2C248AC000F78A5B /* UISegmentedControl.swift in Sources */,
