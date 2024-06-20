@@ -68,6 +68,8 @@
 		9E18BAAA2C24928300F78A5B /* TabBarSelectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAA92C24928300F78A5B /* TabBarSelectionObserver.swift */; };
 		9E18BAAC2C2492C200F78A5B /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAB2C2492C200F78A5B /* StatView.swift */; };
 		9E18BAAE2C2492E500F78A5B /* SmallStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */; };
+		9E18BAB02C24930E00F78A5B /* BigStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAF2C24930E00F78A5B /* BigStatView.swift */; };
+		9E18BAB22C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +157,8 @@
 		9E18BAA92C24928300F78A5B /* TabBarSelectionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSelectionObserver.swift; sourceTree = "<group>"; };
 		9E18BAAB2C2492C200F78A5B /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallStatView.swift; sourceTree = "<group>"; };
+		9E18BAAF2C24930E00F78A5B /* BigStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigStatView.swift; sourceTree = "<group>"; };
+		9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -329,6 +333,8 @@
 				9E18BAA92C24928300F78A5B /* TabBarSelectionObserver.swift */,
 				9E18BAAB2C2492C200F78A5B /* StatView.swift */,
 				9E18BAAD2C2492E500F78A5B /* SmallStatView.swift */,
+				9E18BAAF2C24930E00F78A5B /* BigStatView.swift */,
+				9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -609,12 +615,14 @@
 				9E18BA3B2C173BF700F78A5B /* WorkoutBuilder.swift in Sources */,
 				9E18BA902C248D3800F78A5B /* UITextField.swift in Sources */,
 				9E18BA8E2C248CE600F78A5B /* UIAlertController.swift in Sources */,
+				9E18BAB22C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift in Sources */,
 				9E18BA982C248E3E00F78A5B /* UnitCount.swift in Sources */,
 				9E18BAA22C248FA000F78A5B /* Double.swift in Sources */,
 				9E18BAA42C24916400F78A5B /* LabelledDiagramViewDelegate.swift in Sources */,
 				9E18B9FD2C122CFF00F78A5B /* AppDelegate.swift in Sources */,
 				9E18BA6C2C1AB5DC00F78A5B /* UILabel.swift in Sources */,
 				9E18BA802C2488D700F78A5B /* Sequence.swift in Sources */,
+				9E18BAB02C24930E00F78A5B /* BigStatView.swift in Sources */,
 				9E18BA582C17748500F78A5B /* UnitConversion.swift in Sources */,
 				9E18BA862C24898200F78A5B /* UIFont.swift in Sources */,
 				9E18BA7C2C22140100F78A5B /* SettingsViewController.swift in Sources */,
