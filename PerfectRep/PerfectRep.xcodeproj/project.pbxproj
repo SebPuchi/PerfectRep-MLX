@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		146CB977B6182ADF49F171BD /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B802551009BF871F7A5981 /* Pods_PerfectRep.framework */; };
 		9E18B9FD2C122CFF00F78A5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18B9FC2C122CFF00F78A5B /* AppDelegate.swift */; };
 		9E18B9FF2C122CFF00F78A5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18B9FE2C122CFF00F78A5B /* SceneDelegate.swift */; };
 		9E18BA012C122CFF00F78A5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA002C122CFF00F78A5B /* ViewController.swift */; };
@@ -73,7 +74,17 @@
 		9E18BAB42C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */; };
 		9E18BAB72C24946A00F78A5B /* WorkoutBuilderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB62C24946A00F78A5B /* WorkoutBuilderDelegate.swift */; };
 		9E18BAB92C24952900F78A5B /* WorkoutBuilderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB82C24952900F78A5B /* WorkoutBuilderComponent.swift */; };
-		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
+		9E18BABB2C24996500F78A5B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BABA2C24996500F78A5B /* DataManager.swift */; };
+		9E18BABD2C24A17C00F78A5B /* CoreStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BABC2C24A17C00F78A5B /* CoreStore.framework */; };
+		9E18BABE2C24A17C00F78A5B /* CoreStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BABC2C24A17C00F78A5B /* CoreStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E18BAC12C24A35A00F78A5B /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC02C24A35A00F78A5B /* Cache.framework */; };
+		9E18BAC22C24A35A00F78A5B /* Cache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC02C24A35A00F78A5B /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E18BAC42C24A36100F78A5B /* CoreGPX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC32C24A36100F78A5B /* CoreGPX.framework */; };
+		9E18BAC52C24A36100F78A5B /* CoreGPX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC32C24A36100F78A5B /* CoreGPX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E18BAC72C24A36700F78A5B /* DGCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC62C24A36700F78A5B /* DGCharts.framework */; };
+		9E18BAC82C24A36700F78A5B /* DGCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC62C24A36700F78A5B /* DGCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E18BACA2C24A37000F78A5B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC92C24A37000F78A5B /* SnapKit.framework */; };
+		9E18BACB2C24A37000F78A5B /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18BAC92C24A37000F78A5B /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +104,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9E18BABF2C24A17C00F78A5B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9E18BABE2C24A17C00F78A5B /* CoreStore.framework in Embed Frameworks */,
+				9E18BAC52C24A36100F78A5B /* CoreGPX.framework in Embed Frameworks */,
+				9E18BAC82C24A36700F78A5B /* DGCharts.framework in Embed Frameworks */,
+				9E18BAC22C24A35A00F78A5B /* Cache.framework in Embed Frameworks */,
+				9E18BACB2C24A37000F78A5B /* SnapKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectRep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48B802551009BF871F7A5981 /* Pods_PerfectRep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectRep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B06999D8426C98A4B849A2 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		9E18B9F92C122CFF00F78A5B /* PerfectRep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectRep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E18B9FC2C122CFF00F78A5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E18B9FE2C122CFF00F78A5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,8 +195,13 @@
 		9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempWorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
 		9E18BAB62C24946A00F78A5B /* WorkoutBuilderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutBuilderDelegate.swift; sourceTree = "<group>"; };
 		9E18BAB82C24952900F78A5B /* WorkoutBuilderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutBuilderComponent.swift; sourceTree = "<group>"; };
-		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
-		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
+		9E18BABA2C24996500F78A5B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		9E18BABC2C24A17C00F78A5B /* CoreStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E18BAC02C24A35A00F78A5B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E18BAC32C24A36100F78A5B /* CoreGPX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreGPX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E18BAC62C24A36700F78A5B /* DGCharts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DGCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E18BAC92C24A37000F78A5B /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF49595AAF0BFEF543234ED3 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +209,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */,
+				146CB977B6182ADF49F171BD /* Pods_PerfectRep.framework in Frameworks */,
+				9E18BAC42C24A36100F78A5B /* CoreGPX.framework in Frameworks */,
+				9E18BABD2C24A17C00F78A5B /* CoreStore.framework in Frameworks */,
+				9E18BACA2C24A37000F78A5B /* SnapKit.framework in Frameworks */,
+				9E18BAC72C24A36700F78A5B /* DGCharts.framework in Frameworks */,
+				9E18BAC12C24A35A00F78A5B /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,19 +235,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23D395D6093BAC6E312E1E67 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		885E7B8757D799EC53914C73 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */,
-				AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */,
+				DF49595AAF0BFEF543234ED3 /* Pods-PerfectRep.debug.xcconfig */,
+				90B06999D8426C98A4B849A2 /* Pods-PerfectRep.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -224,7 +256,7 @@
 				9E18BA1C2C122D0100F78A5B /* PerfectRepUITests */,
 				9E18B9FA2C122CFF00F78A5B /* Products */,
 				885E7B8757D799EC53914C73 /* Pods */,
-				23D395D6093BAC6E312E1E67 /* Frameworks */,
+				C5515D7EF0BC82ACDF436A71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -277,6 +309,7 @@
 				9E18BA412C1744AD00F78A5B /* ApplicationStateObservation.swift */,
 				9E18BA482C174B6200F78A5B /* RelativeMeasurement.swift */,
 				9E18BA572C17748500F78A5B /* UnitConversion.swift */,
+				9E18BABA2C24996500F78A5B /* DataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -450,6 +483,19 @@
 			path = WorkoutBuilder;
 			sourceTree = "<group>";
 		};
+		C5515D7EF0BC82ACDF436A71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E18BAC92C24A37000F78A5B /* SnapKit.framework */,
+				9E18BAC62C24A36700F78A5B /* DGCharts.framework */,
+				9E18BAC32C24A36100F78A5B /* CoreGPX.framework */,
+				9E18BAC02C24A35A00F78A5B /* Cache.framework */,
+				9E18BABC2C24A17C00F78A5B /* CoreStore.framework */,
+				48B802551009BF871F7A5981 /* Pods_PerfectRep.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -457,11 +503,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E18BA232C122D0100F78A5B /* Build configuration list for PBXNativeTarget "PerfectRep" */;
 			buildPhases = (
-				61189314C3AC8A687B7F3F68 /* [CP] Check Pods Manifest.lock */,
+				9783B43170D06533BFF5D618 /* [CP] Check Pods Manifest.lock */,
 				9E18B9F52C122CFF00F78A5B /* Sources */,
 				9E18B9F62C122CFF00F78A5B /* Frameworks */,
 				9E18B9F72C122CFF00F78A5B /* Resources */,
-				34DC9402479D4F41D33F5EEC /* [CP] Embed Pods Frameworks */,
+				3110E142E825CCDF99D23A8A /* [CP] Embed Pods Frameworks */,
+				9E18BABF2C24A17C00F78A5B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -579,7 +626,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		34DC9402479D4F41D33F5EEC /* [CP] Embed Pods Frameworks */ = {
+		3110E142E825CCDF99D23A8A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -596,7 +643,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PerfectRep/Pods-PerfectRep-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		61189314C3AC8A687B7F3F68 /* [CP] Check Pods Manifest.lock */ = {
+		9783B43170D06533BFF5D618 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -673,6 +720,7 @@
 				9E18BA4F2C174D5C00F78A5B /* UserPreferences.swift in Sources */,
 				9E18B9FF2C122CFF00F78A5B /* SceneDelegate.swift in Sources */,
 				9E18BA5F2C17788A00F78A5B /* SettingsModel.swift in Sources */,
+				9E18BABB2C24996500F78A5B /* DataManager.swift in Sources */,
 				9E18BA9E2C248F0400F78A5B /* FileManager.swift in Sources */,
 				9E18BA632C1AAF5100F78A5B /* CustomMeasurementFormatting.swift in Sources */,
 				9E18BA512C174DB500F78A5B /* UserPreference.swift in Sources */,
@@ -861,7 +909,7 @@
 		};
 		9E18BA242C122D0100F78A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */;
+			baseConfigurationReference = DF49595AAF0BFEF543234ED3 /* Pods-PerfectRep.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -869,6 +917,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cache/Cache.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CoreGPX/CoreGPX.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CoreStore/CoreStore.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DGCharts/DGCharts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers\"",
+				);
 				INFOPLIST_FILE = PerfectRep/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PerfectRep;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
@@ -893,7 +949,7 @@
 		};
 		9E18BA252C122D0100F78A5B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */;
+			baseConfigurationReference = 90B06999D8426C98A4B849A2 /* Pods-PerfectRep.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

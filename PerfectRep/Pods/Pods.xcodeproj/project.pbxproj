@@ -366,13 +366,13 @@
 		C7E343559158D03F717C616F79FAA006 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470C39B9B9CF8132E6546C4B8F6AD86 /* Foundation.framework */; };
 		C801F030A199AA51E93A433BCD39C40B /* CoreStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B148939B564580F6C8C842475A73C2 /* CoreStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8574B0CA57714FD1B6FF175E81E9CD6 /* ScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D857B467FFCB3917080AE2062DB0D95 /* ScatterChartView.swift */; };
-		CAE46EFB946ED097B2AF1ABB2D5D8021 /* DGCharts-DGCharts in Resources */ = {isa = PBXBuildFile; fileRef = B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts-DGCharts */; };
+		CAE46EFB946ED097B2AF1ABB2D5D8021 /* DGCharts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts.bundle */; };
 		CB6B0AD88496E6436BC8D22B494F751D /* CoreGPX-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E116B1C5EBF068788EEFBBEC80FAE96 /* CoreGPX-dummy.m */; };
 		CB6F1394AFBD0B9E21D4A0ADFC43C31B /* WhereClauseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B01CB02468828775D81D51E13AD1D8 /* WhereClauseType.swift */; };
 		CBCD12C2A917DB5E5E23C05C6FAA6131 /* NSPersistentStore+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113189F50B24E826C06EB7509FD3A613 /* NSPersistentStore+Setup.swift */; };
 		CE37897AECDFCA6CF3399AEC68E5E4BD /* CoreStore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6EA740BAA3C5B210E1BCBF9D3DBE38 /* CoreStore-dummy.m */; };
 		CE63E8E4ED97B3AB8846D728325FBDA7 /* ChartLimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8258EE7A67D5C1C7DA6C4D17B0A94A2F /* ChartLimitLine.swift */; };
-		D091D9EA20CEB92609BF1E622E8CA348 /* SnapKit-SnapKit_Privacy in Resources */ = {isa = PBXBuildFile; fileRef = B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */; };
+		D091D9EA20CEB92609BF1E622E8CA348 /* SnapKit_Privacy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit_Privacy.bundle */; };
 		D1A8A5DFE5D4DB1AEC0A8306FA6B463B /* GPXWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99F598F7045D1966343223094CBC55 /* GPXWaypoint.swift */; };
 		D271D4DE9AB272947F0A7ED7C4CED658 /* Platform+Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67660C9F2B2177C99D771693EEC2060 /* Platform+Graphics.swift */; };
 		D2BCDAD364351BBCADC7A0BA02539FE6 /* AxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FB14ECFD5950483580FC6038951775 /* AxisRenderer.swift */; };
@@ -567,7 +567,7 @@
 		21919C1BD32D98465484FB22F7070CF5 /* Pods-PerfectRep.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PerfectRep.modulemap"; sourceTree = "<group>"; };
 		21BBB71BDB225F524483E8F996755E27 /* NSManagedObjectContext+Logging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+Logging.swift"; path = "Sources/NSManagedObjectContext+Logging.swift"; sourceTree = "<group>"; };
 		22580D71DDCAF0BB5267A833A395F65C /* BarLineScatterCandleBubbleChartDataSetProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineScatterCandleBubbleChartDataSetProtocol.swift; path = Source/Charts/Data/Interfaces/BarLineScatterCandleBubbleChartDataSetProtocol.swift; sourceTree = "<group>"; };
-		22A41C5615228753D23793F66E401A45 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Sources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		22A41C5615228753D23793F66E401A45 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Sources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		22BEB113A4276DBAC780B6E41CDEF909 /* NSMutableString+XML.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSMutableString+XML.swift"; path = "Classes/NSMutableString+XML.swift"; sourceTree = "<group>"; };
 		22FCD4B662E3E7C700039F1513928173 /* UnsafeDataModelSchema.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeDataModelSchema.swift; path = Sources/UnsafeDataModelSchema.swift; sourceTree = "<group>"; };
 		23155771523223D2E4DE2E304260E243 /* Transformable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformable.swift; path = Sources/Transformable.swift; sourceTree = "<group>"; };
@@ -629,7 +629,7 @@
 		4527621134132EB3E3699ACD0149FEBB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		45D9C5B13D107A3BFF9037403721DC0A /* GPXRoute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GPXRoute.swift; path = Classes/GPXRoute.swift; sourceTree = "<group>"; };
 		45FFAA91643F50C4C58A1D8D9562ED90 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+Extensions.swift"; path = "Source/iOS/UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		4645EDF1760243D28E4C73DBB42B4198 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Source/Charts/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4645EDF1760243D28E4C73DBB42B4198 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Source/Charts/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		46721703480938866CCE47380797B3CD /* Value.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Value.swift; path = Sources/Value.swift; sourceTree = "<group>"; };
 		473308F13C2D035BF39272FDBED976A8 /* ChevronDownShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChevronDownShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/ChevronDownShapeRenderer.swift; sourceTree = "<group>"; };
 		477931BC022AC0C5FA7D382C7403A729 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Sources/ConstraintInsets.swift; sourceTree = "<group>"; };
@@ -703,7 +703,7 @@
 		65687657B71E5B1B484AFF96817380C5 /* JSONDictionaryWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONDictionaryWrapper.swift; path = Source/Shared/Library/JSONDictionaryWrapper.swift; sourceTree = "<group>"; };
 		6581C418D144E240DC94CE15394B7127 /* GPXEmail.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GPXEmail.swift; path = Classes/GPXEmail.swift; sourceTree = "<group>"; };
 		66577C9865BE3F7DD1EDF87E48B414B6 /* PieChartDataSetProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataSetProtocol.swift; path = Source/Charts/Data/Interfaces/PieChartDataSetProtocol.swift; sourceTree = "<group>"; };
-		68676CD591957EA4525B4B03D1CF22AD /* CoreGPX */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreGPX; path = CoreGPX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68676CD591957EA4525B4B03D1CF22AD /* CoreGPX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreGPX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F38D0339248EF702BC72F7E1583112 /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };
 		69538996F6413049268BA6F9579F4726 /* FieldStorableType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldStorableType.swift; path = Sources/FieldStorableType.swift; sourceTree = "<group>"; };
 		695D4610C6B07758698855C47AA642ED /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
@@ -725,7 +725,7 @@
 		72434E4743F718AD95912032C639D2AE /* TransformerFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformerFactory.swift; path = Source/Shared/Library/TransformerFactory.swift; sourceTree = "<group>"; };
 		72AE6E887DE24C33DF9FEC9EEEA29022 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		72FAB77C776891C16EE8BBF72A32BB14 /* ObjectProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObjectProxy.swift; path = Sources/ObjectProxy.swift; sourceTree = "<group>"; };
-		736B64357A6C420C3A7062C6D479AC7F /* Cache */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Cache; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		736B64357A6C420C3A7062C6D479AC7F /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FE4C2A8AC5AB20F4B098AC16494E97 /* BubbleChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataProvider.swift; path = Source/Charts/Interfaces/BubbleChartDataProvider.swift; sourceTree = "<group>"; };
 		758D092ED91B5F8661680672660A7FC4 /* TypeWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeWrapper.swift; path = Source/Shared/Library/TypeWrapper.swift; sourceTree = "<group>"; };
 		75B63C6A37786B62DCA5A52E18DA8761 /* Cache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cache.debug.xcconfig; sourceTree = "<group>"; };
@@ -735,7 +735,7 @@
 		779FB21C7FD47AA061AAB12550A09EAB /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Sources/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		784A430EE31CECB860DAEF52D814D6B7 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Sources/ConstraintRelation.swift; sourceTree = "<group>"; };
 		788308BB5AA57C24C8866D7B42F0F211 /* YAxisRendererRadarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRendererRadarChart.swift; path = Source/Charts/Renderers/YAxisRendererRadarChart.swift; sourceTree = "<group>"; };
-		7B15A3841919882D8579CAE7402B3E3C /* CoreStore */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreStore; path = CoreStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B15A3841919882D8579CAE7402B3E3C /* CoreStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B281EFA105284C5B0371D22B1E782B1 /* UnsafeDataTransaction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeDataTransaction.swift; path = Sources/UnsafeDataTransaction.swift; sourceTree = "<group>"; };
 		7B555848B1A4C550B53EC9CD6F9F6D1A /* PartialObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PartialObject.swift; path = Sources/PartialObject.swift; sourceTree = "<group>"; };
 		7B7C516EEC0F04649C28023CB8E02DD9 /* MemoryStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryStorage.swift; path = Source/Shared/Storage/MemoryStorage.swift; sourceTree = "<group>"; };
@@ -748,7 +748,7 @@
 		7D24D0BCCD2AD7FF5DEC683BBB7DD343 /* Cache.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cache.modulemap; sourceTree = "<group>"; };
 		7D5284347AC6F39D9B0E68CF5B5A6FB3 /* AttributeProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AttributeProtocol.swift; path = Sources/AttributeProtocol.swift; sourceTree = "<group>"; };
 		7D58B257703E798FD8AB25C72590188F /* LineChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartDataProvider.swift; path = Source/Charts/Interfaces/LineChartDataProvider.swift; sourceTree = "<group>"; };
-		7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods-PerfectRep */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-PerfectRep"; path = Pods_PerfectRep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods_PerfectRep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerfectRep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E31FF7523E7A1E4C187E84A846B093E /* CandleChartDataSetProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataSetProtocol.swift; path = Source/Charts/Data/Interfaces/CandleChartDataSetProtocol.swift; sourceTree = "<group>"; };
 		7EB90C30ED4A2918767D6C38E0467115 /* SetupResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetupResult.swift; path = Sources/SetupResult.swift; sourceTree = "<group>"; };
 		7ED4C0E8E75BF26961F1968773FBC795 /* Pods-PerfectRep-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PerfectRep-frameworks.sh"; sourceTree = "<group>"; };
@@ -795,7 +795,7 @@
 		94F55F17D67DFC33DA4C47257853FFF7 /* GPXWaypointProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GPXWaypointProtocol.swift; path = Classes/GPXWaypointProtocol.swift; sourceTree = "<group>"; };
 		950C327301645A9835856947D3BE08FC /* KeyPath+Querying.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KeyPath+Querying.swift"; path = "Sources/KeyPath+Querying.swift"; sourceTree = "<group>"; };
 		96F6EADE60DA5520B469FE0D3AD3A507 /* CoreStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CoreStore.release.xcconfig; sourceTree = "<group>"; };
-		979486118B3E90C08386079D57962701 /* SnapKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97A48783B0D2B09F398C5060E273C762 /* BubbleChartDataSetProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataSetProtocol.swift; path = Source/Charts/Data/Interfaces/BubbleChartDataSetProtocol.swift; sourceTree = "<group>"; };
 		97C49ACFFED138BDF329A451A967A3C2 /* CoreStoreSchema.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreStoreSchema.swift; path = Sources/CoreStoreSchema.swift; sourceTree = "<group>"; };
 		9879560B6F74513EBD5A2483E492E8BA /* GPXMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GPXMetadata.swift; path = Classes/GPXMetadata.swift; sourceTree = "<group>"; };
@@ -807,7 +807,7 @@
 		9C041B9463C8E4925F3455785DE9A3D6 /* AxisBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AxisBase.swift; path = Source/Charts/Components/AxisBase.swift; sourceTree = "<group>"; };
 		9C0FC5AE478D9785DC55C6B0AFFDB740 /* MarkerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkerView.swift; path = Source/Charts/Components/MarkerView.swift; sourceTree = "<group>"; };
 		9C81554B43565CE33AA313D14CD76931 /* ChartHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartHighlighter.swift; path = Source/Charts/Highlight/ChartHighlighter.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DDD014D191350BC209A0BDCE86C92C4 /* Transformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Source/Shared/Library/Transformer.swift; sourceTree = "<group>"; };
 		9DFED9D94E1F9B0DFC272533A675840C /* PropertyProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PropertyProtocol.swift; path = Sources/PropertyProtocol.swift; sourceTree = "<group>"; };
 		9E116B1C5EBF068788EEFBBEC80FAE96 /* CoreGPX-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CoreGPX-dummy.m"; sourceTree = "<group>"; };
@@ -820,7 +820,7 @@
 		A10FA1F670048E413EA3EA16B66A1E1E /* Internals.DiffableDataUIDispatcher.StagedChangeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Internals.DiffableDataUIDispatcher.StagedChangeset.swift; path = Sources/Internals.DiffableDataUIDispatcher.StagedChangeset.swift; sourceTree = "<group>"; };
 		A2C3DE923F4B7B3E06AB1C5D03D62243 /* MigrationChain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MigrationChain.swift; path = Sources/MigrationChain.swift; sourceTree = "<group>"; };
 		A2F69AB291E2D1C8E8FC77EC986A3AB1 /* PieChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataEntry.swift; sourceTree = "<group>"; };
-		A3D30211B199757A7A2F0AC792234325 /* DGCharts */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DGCharts; path = DGCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3D30211B199757A7A2F0AC792234325 /* DGCharts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DGCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F18F629CA8C8BCD769F54896F82341 /* ObservationToken.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObservationToken.swift; path = Source/Shared/Library/ObservationToken.swift; sourceTree = "<group>"; };
 		A78C2C268489812730C1C2DD97D5AA22 /* Pods-PerfectRep-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PerfectRep-dummy.m"; sourceTree = "<group>"; };
 		A84B4EC9CCB7C3AF7802B272E947F631 /* Storage+Transform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Storage+Transform.swift"; path = "Source/Shared/Storage/Storage+Transform.swift"; sourceTree = "<group>"; };
@@ -839,7 +839,7 @@
 		AFE1BC7EFE8941D6E6B1DA29BADBD43B /* Internals.EntityIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Internals.EntityIdentifier.swift; path = Sources/Internals.EntityIdentifier.swift; sourceTree = "<group>"; };
 		AFFEB7A83922246A882F6128AD9BA194 /* NSManagedObject+Logging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObject+Logging.swift"; path = "Sources/NSManagedObject+Logging.swift"; sourceTree = "<group>"; };
 		B0179C798626EFFEAFB994740ABDDE21 /* NSManagedObject+DynamicModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObject+DynamicModel.swift"; path = "Sources/NSManagedObject+DynamicModel.swift"; sourceTree = "<group>"; };
-		B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts-DGCharts */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "DGCharts-DGCharts"; path = DGCharts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DGCharts.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E43C63BC2C3951365CC059322BC398 /* Platform+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Platform+Color.swift"; path = "Source/Charts/Utils/Platform+Color.swift"; sourceTree = "<group>"; };
 		B1F6D510C2F8E218890FF44D2E6D93D3 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Sources/ConstraintConfig.swift; sourceTree = "<group>"; };
 		B21AD188679B578B67211A3C0D55F302 /* ObjectRepresentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObjectRepresentation.swift; path = Sources/ObjectRepresentation.swift; sourceTree = "<group>"; };
@@ -859,7 +859,7 @@
 		B933A86E3A20A88C4673242343F9C61D /* ListState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListState.swift; path = Sources/ListState.swift; sourceTree = "<group>"; };
 		B94684ACA754F08C2881DFFB16996C72 /* ExpirationMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpirationMode.swift; path = Source/Shared/Library/ExpirationMode.swift; sourceTree = "<group>"; };
 		B959E2207CB0E79E086874A0A877E1BA /* FieldOptionalType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldOptionalType.swift; path = Sources/FieldOptionalType.swift; sourceTree = "<group>"; };
-		B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SnapKit-SnapKit_Privacy"; path = SnapKit_Privacy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit_Privacy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapKit_Privacy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2A3CA0D86D9DF53149BFA27791C5CE /* HybridStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HybridStorage.swift; path = Source/Shared/Storage/HybridStorage.swift; sourceTree = "<group>"; };
 		BAB4299C667A4BADEC2182F103C9CA26 /* CombinedChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedChartView.swift; path = Source/Charts/Charts/CombinedChartView.swift; sourceTree = "<group>"; };
 		BCA63A98A710689FC9E950725DEA21A4 /* DGCharts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DGCharts.release.xcconfig; sourceTree = "<group>"; };
@@ -1086,7 +1086,6 @@
 				22BEB113A4276DBAC780B6E41CDEF909 /* NSMutableString+XML.swift */,
 				EB4F0845EEE6F10108A8308D442BB3D4 /* Support Files */,
 			);
-			name = CoreGPX;
 			path = CoreGPX;
 			sourceTree = "<group>";
 		};
@@ -1270,7 +1269,6 @@
 				DBDACE0D6C277971CB53BE8E5D106ED8 /* Resources */,
 				63444155CE1167A878233ECB1C02CD1B /* Support Files */,
 			);
-			name = DGCharts;
 			path = DGCharts;
 			sourceTree = "<group>";
 		};
@@ -1312,7 +1310,6 @@
 				45FFAA91643F50C4C58A1D8D9562ED90 /* UIImage+Extensions.swift */,
 				0F59B3BF9C77B636F47C5249DFD4C5CC /* Support Files */,
 			);
-			name = Cache;
 			path = Cache;
 			sourceTree = "<group>";
 		};
@@ -1367,7 +1364,6 @@
 				5DFCCDD38D8498387FBC65F8DD53F95B /* Resources */,
 				BC48DBD3D1FF391012BB4AFB46589FE8 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -1576,7 +1572,6 @@
 				839F153BC364D5C73885594413E915FD /* XcodeSchemaMappingProvider.swift */,
 				A56F2C96D721C5FDB380090C8758827B /* Support Files */,
 			);
-			name = CoreStore;
 			path = CoreStore;
 			sourceTree = "<group>";
 		};
@@ -1686,14 +1681,14 @@
 		F01A637EC41DDBD84B74DBB5F5AB99E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				736B64357A6C420C3A7062C6D479AC7F /* Cache */,
-				68676CD591957EA4525B4B03D1CF22AD /* CoreGPX */,
-				7B15A3841919882D8579CAE7402B3E3C /* CoreStore */,
-				A3D30211B199757A7A2F0AC792234325 /* DGCharts */,
-				B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts-DGCharts */,
-				7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods-PerfectRep */,
-				979486118B3E90C08386079D57962701 /* SnapKit */,
-				B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */,
+				736B64357A6C420C3A7062C6D479AC7F /* Cache.framework */,
+				68676CD591957EA4525B4B03D1CF22AD /* CoreGPX.framework */,
+				7B15A3841919882D8579CAE7402B3E3C /* CoreStore.framework */,
+				A3D30211B199757A7A2F0AC792234325 /* DGCharts.framework */,
+				B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts.bundle */,
+				7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods_PerfectRep.framework */,
+				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
+				B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit_Privacy.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1769,7 +1764,7 @@
 			);
 			name = SnapKit;
 			productName = SnapKit;
-			productReference = 979486118B3E90C08386079D57962701 /* SnapKit */;
+			productReference = 979486118B3E90C08386079D57962701 /* SnapKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1A45FD29A4AA9CDF298A4BF42A786710 /* Pods-PerfectRep */ = {
@@ -1792,7 +1787,7 @@
 			);
 			name = "Pods-PerfectRep";
 			productName = Pods_PerfectRep;
-			productReference = 7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods-PerfectRep */;
+			productReference = 7D66EDB52238DFBD6D3F93D187D8E8C5 /* Pods_PerfectRep.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		493735E92C5B6068F445B48D0CA7B736 /* CoreGPX */ = {
@@ -1810,7 +1805,7 @@
 			);
 			name = CoreGPX;
 			productName = CoreGPX;
-			productReference = 68676CD591957EA4525B4B03D1CF22AD /* CoreGPX */;
+			productReference = 68676CD591957EA4525B4B03D1CF22AD /* CoreGPX.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		759D0F22224FF87BBDA4723538A5F811 /* DGCharts */ = {
@@ -1829,7 +1824,7 @@
 			);
 			name = DGCharts;
 			productName = DGCharts;
-			productReference = A3D30211B199757A7A2F0AC792234325 /* DGCharts */;
+			productReference = A3D30211B199757A7A2F0AC792234325 /* DGCharts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */ = {
@@ -1846,7 +1841,7 @@
 			);
 			name = "SnapKit-SnapKit_Privacy";
 			productName = SnapKit_Privacy;
-			productReference = B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */;
+			productReference = B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit_Privacy.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		9513DC9A6C5DA07EDB2094920BC9EE79 /* Cache */ = {
@@ -1864,7 +1859,7 @@
 			);
 			name = Cache;
 			productName = Cache;
-			productReference = 736B64357A6C420C3A7062C6D479AC7F /* Cache */;
+			productReference = 736B64357A6C420C3A7062C6D479AC7F /* Cache.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E3E4DDB497F163AABDC25A28254F28F9 /* DGCharts-DGCharts */ = {
@@ -1881,7 +1876,7 @@
 			);
 			name = "DGCharts-DGCharts";
 			productName = DGCharts;
-			productReference = B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts-DGCharts */;
+			productReference = B09B3C05ADDB6FD455CE9C0A26AF482B /* DGCharts.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		EEB5F31E63719CD4DD3501CC59B944F1 /* CoreStore */ = {
@@ -1899,7 +1894,7 @@
 			);
 			name = CoreStore;
 			productName = CoreStore;
-			productReference = 7B15A3841919882D8579CAE7402B3E3C /* CoreStore */;
+			productReference = 7B15A3841919882D8579CAE7402B3E3C /* CoreStore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1908,8 +1903,9 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1540;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -1941,7 +1937,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE46EFB946ED097B2AF1ABB2D5D8021 /* DGCharts-DGCharts in Resources */,
+				CAE46EFB946ED097B2AF1ABB2D5D8021 /* DGCharts.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1963,7 +1959,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D091D9EA20CEB92609BF1E622E8CA348 /* SnapKit-SnapKit_Privacy in Resources */,
+				D091D9EA20CEB92609BF1E622E8CA348 /* SnapKit_Privacy.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2532,6 +2528,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2563,9 +2560,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2582,7 +2581,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -2595,24 +2593,24 @@
 			baseConfigurationReference = FCF4D1457272CF22BB2EE574ABB59E05 /* Cache.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Cache/Cache-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Cache/Cache-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/Cache/Cache.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = Cache;
 				PRODUCT_NAME = Cache;
 				SDKROOT = iphoneos;
@@ -2648,14 +2646,13 @@
 			baseConfigurationReference = 96F6EADE60DA5520B469FE0D3AD3A507 /* CoreStore.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CoreStore/CoreStore-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CoreStore/CoreStore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -2666,6 +2663,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/CoreStore/CoreStore.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = CoreStore;
 				PRODUCT_NAME = CoreStore;
 				SDKROOT = iphoneos;
@@ -2685,14 +2683,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
@@ -2703,6 +2700,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -2723,14 +2721,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
@@ -2741,6 +2738,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -2758,6 +2756,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2789,9 +2788,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2812,7 +2813,6 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2824,24 +2824,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42E5B70CAF802D4847BE3497C5F85B4E /* CoreGPX.debug.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CoreGPX/CoreGPX-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CoreGPX/CoreGPX-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/CoreGPX/CoreGPX.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = CoreGPX;
 				PRODUCT_NAME = CoreGPX;
 				SDKROOT = iphoneos;
@@ -2858,24 +2858,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C8B84F3B87427010BD44B18B1C6E570 /* CoreGPX.release.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CoreGPX/CoreGPX-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CoreGPX/CoreGPX-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/CoreGPX/CoreGPX.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = CoreGPX;
 				PRODUCT_NAME = CoreGPX;
 				SDKROOT = iphoneos;
@@ -2894,14 +2894,13 @@
 			baseConfigurationReference = 601CD53D4D13582E95E5D479AF02086A /* SnapKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -2912,6 +2911,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/SnapKit/SnapKit.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = SnapKit;
 				PRODUCT_NAME = SnapKit;
 				SDKROOT = iphoneos;
@@ -2947,14 +2947,13 @@
 			baseConfigurationReference = CB3F10C54CA05BE112885ACC60099969 /* SnapKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -2965,6 +2964,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/SnapKit/SnapKit.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = SnapKit;
 				PRODUCT_NAME = SnapKit;
 				SDKROOT = iphoneos;
@@ -2982,14 +2982,13 @@
 			baseConfigurationReference = 322118A894B0254EF4E43E11A9A8CBA1 /* CoreStore.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CoreStore/CoreStore-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CoreStore/CoreStore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3000,6 +2999,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/CoreStore/CoreStore.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = CoreStore;
 				PRODUCT_NAME = CoreStore;
 				SDKROOT = iphoneos;
@@ -3034,24 +3034,24 @@
 			baseConfigurationReference = 75B63C6A37786B62DCA5A52E18DA8761 /* Cache.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Cache/Cache-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Cache/Cache-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/Cache/Cache.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = Cache;
 				PRODUCT_NAME = Cache;
 				SDKROOT = iphoneos;
@@ -3069,14 +3069,13 @@
 			baseConfigurationReference = 5F2D7DF3C8B8FE43CDB1F49B5ADB17CE /* DGCharts.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/DGCharts/DGCharts-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DGCharts/DGCharts-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3087,6 +3086,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/DGCharts/DGCharts.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = DGCharts;
 				PRODUCT_NAME = DGCharts;
 				SDKROOT = iphoneos;
@@ -3121,14 +3121,13 @@
 			baseConfigurationReference = BCA63A98A710689FC9E950725DEA21A4 /* DGCharts.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/DGCharts/DGCharts-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DGCharts/DGCharts-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3139,6 +3138,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/DGCharts/DGCharts.modulemap";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_MODULE_NAME = DGCharts;
 				PRODUCT_NAME = DGCharts;
 				SDKROOT = iphoneos;
