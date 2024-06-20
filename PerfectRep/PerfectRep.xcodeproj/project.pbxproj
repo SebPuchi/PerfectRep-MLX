@@ -59,6 +59,7 @@
 		9E18BA962C248E0C00F78A5B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA952C248E0C00F78A5B /* Array.swift */; };
 		9E18BA982C248E3E00F78A5B /* UnitCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA972C248E3E00F78A5B /* UnitCount.swift */; };
 		9E18BA9A2C248E9100F78A5B /* ClosedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA992C248E9100F78A5B /* ClosedRange.swift */; };
+		9E18BA9C2C248ECD00F78A5B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA9B2C248ECD00F78A5B /* URL.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +138,7 @@
 		9E18BA952C248E0C00F78A5B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		9E18BA972C248E3E00F78A5B /* UnitCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCount.swift; sourceTree = "<group>"; };
 		9E18BA992C248E9100F78A5B /* ClosedRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedRange.swift; sourceTree = "<group>"; };
+		9E18BA9B2C248ECD00F78A5B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -357,6 +359,7 @@
 				9E18BA952C248E0C00F78A5B /* Array.swift */,
 				9E18BA972C248E3E00F78A5B /* UnitCount.swift */,
 				9E18BA992C248E9100F78A5B /* ClosedRange.swift */,
+				9E18BA9B2C248ECD00F78A5B /* URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				9E18BA962C248E0C00F78A5B /* Array.swift in Sources */,
 				9E18BA5A2C17750F00F78A5B /* Setting.swift in Sources */,
 				9E18BA6E2C1AB80C00F78A5B /* TitleSetting.swift in Sources */,
+				9E18BA9C2C248ECD00F78A5B /* URL.swift in Sources */,
 				9E18BA7E2C2215CE00F78A5B /* UIViewController.swift in Sources */,
 				9E18BA6A2C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift in Sources */,
 				9E18BA3E2C1741E200F78A5B /* ApplicationStateObserver.swift in Sources */,
