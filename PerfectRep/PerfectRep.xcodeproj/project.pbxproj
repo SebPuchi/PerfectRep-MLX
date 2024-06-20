@@ -62,6 +62,7 @@
 		9E18BA9C2C248ECD00F78A5B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA9B2C248ECD00F78A5B /* URL.swift */; };
 		9E18BA9E2C248F0400F78A5B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA9D2C248F0400F78A5B /* FileManager.swift */; };
 		9E18BAA02C248F5A00F78A5B /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA9F2C248F5A00F78A5B /* DiskStorage.swift */; };
+		9E18BAA22C248FA000F78A5B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAA12C248FA000F78A5B /* Double.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,7 @@
 		9E18BA9B2C248ECD00F78A5B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		9E18BA9D2C248F0400F78A5B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		9E18BA9F2C248F5A00F78A5B /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		9E18BAA12C248FA000F78A5B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,6 +368,7 @@
 				9E18BA9B2C248ECD00F78A5B /* URL.swift */,
 				9E18BA9D2C248F0400F78A5B /* FileManager.swift */,
 				9E18BA9F2C248F5A00F78A5B /* DiskStorage.swift */,
+				9E18BAA12C248FA000F78A5B /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				9E18BA902C248D3800F78A5B /* UITextField.swift in Sources */,
 				9E18BA8E2C248CE600F78A5B /* UIAlertController.swift in Sources */,
 				9E18BA982C248E3E00F78A5B /* UnitCount.swift in Sources */,
+				9E18BAA22C248FA000F78A5B /* Double.swift in Sources */,
 				9E18B9FD2C122CFF00F78A5B /* AppDelegate.swift in Sources */,
 				9E18BA6C2C1AB5DC00F78A5B /* UILabel.swift in Sources */,
 				9E18BA802C2488D700F78A5B /* Sequence.swift in Sources */,
