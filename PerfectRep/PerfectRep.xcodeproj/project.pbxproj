@@ -48,6 +48,7 @@
 		9E18BA7E2C2215CE00F78A5B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */; };
 		9E18BA802C2488D700F78A5B /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA7F2C2488D700F78A5B /* Sequence.swift */; };
 		9E18BA822C24890A00F78A5B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA812C24890A00F78A5B /* UIView.swift */; };
+		9E18BA862C24898200F78A5B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA852C24898200F78A5B /* UIFont.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		9E18BA7F2C2488D700F78A5B /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		9E18BA812C24890A00F78A5B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		9E18BA852C24898200F78A5B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,6 +326,7 @@
 				9E18BA7D2C2215CE00F78A5B /* UIViewController.swift */,
 				9E18BA7F2C2488D700F78A5B /* Sequence.swift */,
 				9E18BA812C24890A00F78A5B /* UIView.swift */,
+				9E18BA852C24898200F78A5B /* UIFont.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				9E18BA6C2C1AB5DC00F78A5B /* UILabel.swift in Sources */,
 				9E18BA802C2488D700F78A5B /* Sequence.swift in Sources */,
 				9E18BA582C17748500F78A5B /* UnitConversion.swift in Sources */,
+				9E18BA862C24898200F78A5B /* UIFont.swift in Sources */,
 				9E18BA7C2C22140100F78A5B /* SettingsViewController.swift in Sources */,
 				9E18BA492C174B6200F78A5B /* RelativeMeasurement.swift in Sources */,
 				9E18BA822C24890A00F78A5B /* UIView.swift in Sources */,
