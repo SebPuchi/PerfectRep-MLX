@@ -15,9 +15,7 @@ protocol Setting {
     var section: SettingSection? { get set }
     var usesClosures: Bool { get }
     
-    
-    //Set up view contoller for Settings
-    //func runSelectAction(controller: SettingsViewController)
+    func runSelectAction(controller: SettingsViewController)
     func updateClosures()
     func refresh()
     
