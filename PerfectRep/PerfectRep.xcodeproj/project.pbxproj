@@ -71,6 +71,7 @@
 		9E18BAB02C24930E00F78A5B /* BigStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAAF2C24930E00F78A5B /* BigStatView.swift */; };
 		9E18BAB22C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */; };
 		9E18BAB42C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */; };
+		9E18BAB72C24946A00F78A5B /* WorkoutBuilderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BAB62C24946A00F78A5B /* WorkoutBuilderDelegate.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +162,7 @@
 		9E18BAAF2C24930E00F78A5B /* BigStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigStatView.swift; sourceTree = "<group>"; };
 		9E18BAB12C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
 		9E18BAB32C2493D200F78A5B /* TempWorkoutSeriesDataSampleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempWorkoutSeriesDataSampleType.swift; sourceTree = "<group>"; };
+		9E18BAB62C24946A00F78A5B /* WorkoutBuilderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutBuilderDelegate.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -327,6 +329,7 @@
 		9E18BA3C2C1741A500F78A5B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				9E18BAB52C24944A00F78A5B /* WorkoutBuilder */,
 				9E18BA3D2C1741E200F78A5B /* ApplicationStateObserver.swift */,
 				9E18BA592C17750F00F78A5B /* Setting.swift */,
 				9E18BA692C1AB45800F78A5B /* KeyboardAvoidanceSetting.swift */,
@@ -434,6 +437,14 @@
 				9E18BA7B2C22140100F78A5B /* SettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		9E18BAB52C24944A00F78A5B /* WorkoutBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				9E18BAB62C24946A00F78A5B /* WorkoutBuilderDelegate.swift */,
+			);
+			path = WorkoutBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -617,6 +628,7 @@
 				9E18BA012C122CFF00F78A5B /* ViewController.swift in Sources */,
 				9E18BA3B2C173BF700F78A5B /* WorkoutBuilder.swift in Sources */,
 				9E18BA902C248D3800F78A5B /* UITextField.swift in Sources */,
+				9E18BAB72C24946A00F78A5B /* WorkoutBuilderDelegate.swift in Sources */,
 				9E18BA8E2C248CE600F78A5B /* UIAlertController.swift in Sources */,
 				9E18BAB22C24932E00F78A5B /* WorkoutSeriesDataSampleType.swift in Sources */,
 				9E18BA982C248E3E00F78A5B /* UnitCount.swift in Sources */,
