@@ -50,6 +50,8 @@
 		9E18BA822C24890A00F78A5B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA812C24890A00F78A5B /* UIView.swift */; };
 		9E18BA862C24898200F78A5B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA852C24898200F78A5B /* UIFont.swift */; };
 		9E18BA882C248A7400F78A5B /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA872C248A7400F78A5B /* CLLocation.swift */; };
+		9E18BA8A2C248AC000F78A5B /* UISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA892C248AC000F78A5B /* UISegmentedControl.swift */; };
+		9E18BA8C2C248B9100F78A5B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18BA8B2C248B9100F78A5B /* UIImage.swift */; };
 		F4E4607880F730E1AD31679E /* Pods_PerfectRep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A891B61E7E58E6C72841E13 /* Pods_PerfectRep.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +121,8 @@
 		9E18BA812C24890A00F78A5B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		9E18BA852C24898200F78A5B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		9E18BA872C248A7400F78A5B /* CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
+		9E18BA892C248AC000F78A5B /* UISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControl.swift; sourceTree = "<group>"; };
+		9E18BA8B2C248B9100F78A5B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		AF25DCD840509F1B5CBEFB05 /* Pods-PerfectRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.release.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.release.xcconfig"; sourceTree = "<group>"; };
 		D4B40E9BEFC228A7B08B32D1 /* Pods-PerfectRep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerfectRep.debug.xcconfig"; path = "Target Support Files/Pods-PerfectRep/Pods-PerfectRep.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -330,6 +334,8 @@
 				9E18BA812C24890A00F78A5B /* UIView.swift */,
 				9E18BA852C24898200F78A5B /* UIFont.swift */,
 				9E18BA872C248A7400F78A5B /* CLLocation.swift */,
+				9E18BA892C248AC000F78A5B /* UISegmentedControl.swift */,
+				9E18BA8B2C248B9100F78A5B /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				9E18BA762C21F12A00F78A5B /* ButtonSetting.swift in Sources */,
 				9E18BA882C248A7400F78A5B /* CLLocation.swift in Sources */,
 				9E18BA742C21EFA700F78A5B /* SwitchSetting.swift in Sources */,
+				9E18BA8C2C248B9100F78A5B /* UIImage.swift in Sources */,
 				9E18BA472C1747F200F78A5B /* WorkoutStats.swift in Sources */,
 				9E18BA722C21EE7E00F78A5B /* SelectionSetting.swift in Sources */,
 				9E18BA562C175E0500F78A5B /* Units.swift in Sources */,
@@ -584,6 +591,7 @@
 				9E18BA512C174DB500F78A5B /* UserPreference.swift in Sources */,
 				9E18BA662C1AB39700F78A5B /* TextInputSetting.swift in Sources */,
 				9E18BA4C2C174BF100F78A5B /* CustomNumberFormatting.swift in Sources */,
+				9E18BA8A2C248AC000F78A5B /* UISegmentedControl.swift in Sources */,
 				9E18BA422C1744AD00F78A5B /* ApplicationStateObservation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
